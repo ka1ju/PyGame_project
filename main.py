@@ -28,7 +28,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
-            click_return = stage.click()
+            click_return = stage.click(event.pos)
             if click_return == 'Level':
                 pass#здесь поменять переменную stage из Menu на класс Level
         if pygame.mouse.get_focused():
