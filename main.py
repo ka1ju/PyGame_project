@@ -9,7 +9,7 @@ running = True
 
 screen.fill(pygame.Color('purple'))
 
-CURSOR = pygame.image.load("sprites/mouse_last_vers.png").convert_alpha()
+CURSOR = pygame.image.load("sprites/img_cursor.png").convert_alpha()
 pygame.mouse.set_cursor((8, 8), (4, 4), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
 pygame.mouse.set_visible(False)
 
