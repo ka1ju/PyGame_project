@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 scr = pygame.display.set_mode((500, 800))
@@ -29,7 +30,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             print(pygame.mouse.get_pos())
             pos = pygame.mouse.get_pos()
-            if 225 <= pos[0] <= 252 and 704 >= pos[1] >= 675: #up
+            if 225 <= pos[0] <= 252 and 704 >= pos[1] >= 675:  # up
                 choose = pygame.image.load("textures/mini_choose.jpg").convert()
                 chxy = (234, 677)
                 field = pygame.image.load("textures/frond_field.jpg").convert()
@@ -39,7 +40,7 @@ while running:
                     user = pygame.image.load("textures/user.png").convert_alpha()
                 else:
                     user.fill((0, 0, 0, 0))
-            elif 226 <= pos[0] <= 252 and 705 <= pos[1] <= 763: #back
+            elif 226 <= pos[0] <= 252 and 705 <= pos[1] <= 763:  # back
                 choose = pygame.image.load("textures/big_choose.jpg").convert()
                 chxy = (234, 706)
                 field = pygame.image.load("textures/first_side_field.jpg").convert()
@@ -49,7 +50,7 @@ while running:
                     user = pygame.image.load("textures/user.png").convert_alpha()
                 else:
                     user.fill((0, 0, 0, 0))
-            elif 171 <= pos[0] <= 197 and 704 <= pos[1] <= 763: #front
+            elif 171 <= pos[0] <= 197 and 704 <= pos[1] <= 763:  # front
                 choose = pygame.image.load("textures/big_choose.jpg").convert()
                 chxy = (179, 706)
                 field = pygame.image.load("textures/first_side_field.jpg").convert()
@@ -59,7 +60,7 @@ while running:
                     user = pygame.image.load("textures/user.png").convert_alpha()
                 else:
                     user.fill((0, 0, 0, 0))
-            elif 198 <= pos[0] <= 225 and 705 <= pos[1] <= 763: #left
+            elif 198 <= pos[0] <= 225 and 705 <= pos[1] <= 763:  # left
                 choose = pygame.image.load("textures/left_right_big_choose.jpg").convert()
                 chxy = (206, 706)
                 field = pygame.image.load("textures/first_side_field.jpg").convert()
@@ -69,7 +70,7 @@ while running:
                     user = pygame.image.load("textures/user.png").convert_alpha()
                 else:
                     user.fill((0, 0, 0, 0))
-            elif 254 <= pos[0] <= 280 and 706 <= pos[1] <= 763: #right
+            elif 254 <= pos[0] <= 280 and 706 <= pos[1] <= 763:  # right
                 choose = pygame.image.load("textures/left_right_big_choose.jpg").convert()
                 chxy = (261, 706)
                 field = pygame.image.load("textures/first_side_field.jpg").convert()
@@ -79,7 +80,7 @@ while running:
                     user = pygame.image.load("textures/user.png").convert_alpha()
                 else:
                     user.fill((0, 0, 0, 0))
-            elif 226 <= pos[0] <= 252 and 765 <= pos[1] <= 794: #down
+            elif 226 <= pos[0] <= 252 and 765 <= pos[1] <= 794:  # down
                 choose = pygame.image.load("textures/mini_choose.jpg").convert()
                 chxy = (234, 765)
                 field = pygame.image.load("textures/back_field.jpg").convert()
@@ -89,36 +90,40 @@ while running:
                     user = pygame.image.load("textures/user.png").convert_alpha()
                 else:
                     user.fill((0, 0, 0, 0))
-            #блок с отрисовкой граней и персонажа на них
+            # блок с отрисовкой граней и персонажа на них
             if flag == u_pos[0]:
-                #проверка на границы поля
-                if posxy[0] < pos[0] < posxy[0] + 350 and (posxy[1] < pos[1] < posxy[1] + 350 or posxy[1] < pos[1] < posxy[1] + 650):
-                    if u_pos[1][0] - 58 <= pos[0] <= u_pos[1][0] + 90 and u_pos[1][1] - 50 <= pos[1] <= u_pos[1][1] + 100:
+                # проверка на границы поля
+                if posxy[0] < pos[0] < posxy[0] + 350 and (
+                        posxy[1] < pos[1] < posxy[1] + 350 or posxy[1] < pos[1] < posxy[1] + 650):
+                    if u_pos[1][0] - 58 <= pos[0] <= u_pos[1][0] + 90 and u_pos[1][1] - 50 <= pos[1] <= u_pos[1][
+                        1] + 100:
                         user_coords = list(user_coords)
-                        if u_pos[1][0] - 10 < pos[0] and u_pos[1][0] + 39 < pos[0] or u_pos[1][0] - 10 > pos[0] and u_pos[1][0] + 39 > pos[0] and u_pos[1][1] <= pos[1] <= u_pos[1][1] + 48: #<-
+                        if u_pos[1][0] - 10 < pos[0] and u_pos[1][0] + 39 < pos[0] or u_pos[1][0] - 10 > pos[0] and \
+                                u_pos[1][0] + 39 > pos[0] and u_pos[1][1] <= pos[1] <= u_pos[1][1] + 48:  # <-
                             if u_pos[1][0] - 58 <= pos[0] <= u_pos[1][0] and u_pos[1][1] <= pos[1] <= u_pos[1][1] + 48:
                                 user_coords[0] -= 50
-                            elif u_pos[1][0] <= pos[0] <= u_pos[1][0] + 90 and u_pos[1][1] <= pos[1] <= u_pos[1][1] + 48: #->
+                            elif u_pos[1][0] <= pos[0] <= u_pos[1][0] + 90 and u_pos[1][1] <= pos[1] <= u_pos[1][
+                                1] + 48:  # ->
                                 user_coords[0] += 50
-                        elif u_pos[1][1] < pos[1] and u_pos[1][1] + 50 < pos[1] or u_pos[1][1] > pos[1] and u_pos[1][1] + 50 > pos[1] and u_pos[1][0] - 10 <= pos[0] <= u_pos[1][0] + 50:
+                        elif u_pos[1][1] < pos[1] and u_pos[1][1] + 50 < pos[1] or u_pos[1][1] > pos[1] and u_pos[1][
+                            1] + 50 > pos[1] and u_pos[1][0] - 10 <= pos[0] <= u_pos[1][0] + 50:
                             print("QQQ")
-                            if u_pos[1][1] - 50 <= pos[1] <= u_pos[1][1] and u_pos[1][0] - 8 <= pos[0] <= u_pos[1][0] + 50:
+                            if u_pos[1][1] - 50 <= pos[1] <= u_pos[1][1] and u_pos[1][0] - 8 <= pos[0] <= u_pos[1][
+                                0] + 50:
                                 user_coords[1] -= 50
-                            elif u_pos[1][1] <= pos[1] <= u_pos[1][1] + 100 and u_pos[1][0] - 8 <= pos[0] <= u_pos[1][0] + 50:
+                            elif u_pos[1][1] <= pos[1] <= u_pos[1][1] + 100 and u_pos[1][0] - 8 <= pos[0] <= u_pos[1][
+                                0] + 50:
                                 user_coords[1] += 50
                         print(u_pos[1][1], pos[1], u_pos[1][1] + 50)
                         user_coords = tuple(user_coords)
-                        u_pos = (side, user_coords)  # сделать 0 элемент как переменную, которая будет меняться. Также сделать обработку. Если на другой грани и нажимаю, то не ходить. Делать ход, если нахожусь на грани с персонажем
+                        u_pos = (side,
+                                 user_coords)  # сделать 0 элемент как переменную, которая будет меняться. Также сделать обработку. Если на другой грани и нажимаю, то не ходить. Делать ход, если нахожусь на грани с персонажем
 
         if pygame.mouse.get_focused():
             scr.blit(CURSOR, (pygame.mouse.get_pos()))
             pygame.display.update()
     pygame.display.flip()
 
-#если в field будет только поле, то сделать функции с отрисовкой
-#изменение положения юзера на грани через кнопку перехода на грань(если  нажал, то меняем)
-#сделать стены. тогда не будет выхода за карту
-
-
-
-
+# если в field будет только поле, то сделать функции с отрисовкой
+# изменение положения юзера на грани через кнопку перехода на грань(если  нажал, то меняем)
+# сделать стены. тогда не будет выхода за карту
