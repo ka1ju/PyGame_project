@@ -84,6 +84,13 @@ class MainScreen:
         self.img_game_close.rect.y = height - 25
         main_screen_sprites.add(self.img_game_close)
 
+        self.img_close = pygame.sprite.Sprite()
+        self.img_close.image = pygame.transform.scale(load_image('sprites/close.png'), (15, 15))
+        self.img_close.rect = self.img_close.image.get_rect()
+        self.img_close.rect.x = width - 20
+        self.img_close.rect.y = height - 20
+        main_screen_sprites.add(self.img_close)
+
     def render(self):
         main_screen_sprites.draw(screen)
 
@@ -133,6 +140,13 @@ class Shop:
         self.img_shop_close_btn.rect.x = width - 25
         self.img_shop_close_btn.rect.y = height - 25
         shop_sprites.add(self.img_shop_close_btn)
+
+        self.img_close = pygame.sprite.Sprite()
+        self.img_close.image = pygame.transform.scale(load_image('sprites/close.png'), (15, 15))
+        self.img_close.rect = self.img_close.image.get_rect()
+        self.img_close.rect.x = width - 20
+        self.img_close.rect.y = height - 20
+        shop_sprites.add(self.img_close)
 
     def render(self):
         shop_sprites.draw(screen)
