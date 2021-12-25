@@ -2,7 +2,7 @@ import pygame
 import os
 import sys
 import json
-from windows import MainScreen, Shop, Level_Pick, level
+from windows import MainScreen, Shop, Level_Pick, level, Win
 
 pygame.display.set_caption('cube-lab')
 size = width, height = 500, 800
@@ -20,7 +20,7 @@ wall_sprites = pygame.sprite.Group()
 color_sprites = pygame.sprite.Group()
 
 
-ms = MainScreen()
+ms = Win(screen)
 ms.screen = screen
 ren = ''
 

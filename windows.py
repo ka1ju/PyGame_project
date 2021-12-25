@@ -61,6 +61,24 @@ wall = pygame.image.load("textures/wall.jpg").convert_alpha()
 first_is = True
 
 
+class Win():
+    def __init__(self, screen):
+        self.screen = screen
+        self.background = load_image('textures/level_pcik_back.png')
+        self.good = pygame.transform.scale(load_image('textures/good.png', (100, 100)), (100, 100))
+        self.myfont1 = pygame.font.SysFont('arial', 70)
+        self.myfont = pygame.font.SysFont('arial', 50)
+
+    def render(self, arg):
+        surf = self.myfont1.render(str('ТЫ ПРОШЕЛ!'), False, pygame.Color('red'))
+        surf1 = self.myfont.render(str('Ну и молодец!'), False, pygame.Color('red'))
+        self.screen.fill((0, 0, 0))
+        self.screen.blit(self.background, (0, 0))
+        self.screen.blit(self.good, (200, 600))
+        self.screen.blit(surf1, (100, 300))
+        self.screen.blit(surf, (25, 100))
+
+
 class level():
     def __init__(self, screen, walls):
         self.scr = screen
@@ -194,8 +212,6 @@ class level():
         if self.side == self.walls['win'][0] and self.user_coords == tuple(self.walls['win'][1]):
             print('win')
 
-
-
     def step(self, u_pos, user_coords):
         f_u_pos = u_pos
         f_user_coords = user_coords
@@ -298,7 +314,6 @@ class level():
             self.u_pos = [self.side, self.user_coords]
             self.choose, self.flag, self.field, self.user = upp[0], upp[1], upp[2], upp[3]
         return self.choose, self.flag, self.field, self.u_pos, self.chxy, self.posxy, self.side, self.user_coords
-
 
 
 class Level_Pick:
