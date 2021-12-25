@@ -26,7 +26,7 @@ def load_image(name, color_key=None):
 main_screen_sprites = pygame.sprite.Group()
 
 background = pygame.sprite.Sprite()
-background.image = pygame.transform.scale(load_image('sprites/background.jpg'), (width, height))
+background.image = pygame.transform.scale(load_image('sprites/background.png'), (width, height))
 background.rect = background.image.get_rect()
 background.rect.x = 0
 background.rect.y = 0
