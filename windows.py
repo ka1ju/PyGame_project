@@ -56,8 +56,12 @@ class Level_Pick:
     def click(self, pos):
         if 0 <= pos[0] <= 100 and 300 <= pos[1] <= 400:
             self.level -= 1
+            if self.level < 1:
+                self.level = 1
         elif 400 <= pos[0] <= 500 and 300 <= pos[1] <= 400:
             self.level += 1
+            if self.level > 2:
+                self.level = 2
         elif 125 <= pos[0] <= 385 and 600 <= pos[1] <= 745:
             return 'level'
 
