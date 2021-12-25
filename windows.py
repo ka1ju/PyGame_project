@@ -123,6 +123,10 @@ class level():
                 sprite.image = load_image("textures/wall.jpg")
                 sprite.rect = pygame.Rect((el[0], el[1], 50, 50))
                 self.all_sprites.add(sprite)
+            if self.flag == self.walls['win'][0]:
+                sprite.image = load_image("textures/finish.png")
+                sprite.rect = pygame.Rect((self.walls['win'][1][0], self.walls['win'][1][1], 50, 50))
+                self.all_sprites.add(sprite)
         self.first_is = False
         self.all_sprites.draw(self.scr)
         ct = self.check_turn()
@@ -187,7 +191,8 @@ class level():
                 self.all_sprites.remove(*[el for el in self.all_sprites])
             except UnboundLocalError:
                 pass
-        pass
+        if self.side == self.walls['win'][0] and self.user_coords == tuple(self.walls['win'][1]):
+            print('win')
 
 
 
