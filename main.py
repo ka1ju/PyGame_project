@@ -329,7 +329,7 @@ class level():
 
 
 stage = level()
-
+#F
 while running:
     for event in pygame.event.get():
         stage.render()
