@@ -87,7 +87,7 @@ class Win():
             p = self.k - g[str(level)]
             g[str(level)] = self.k
             g['stars'] += p
-        json.dump(f, g)
+        json.dump(g, f)
         f.close()
 
     def render(self, arg):
@@ -102,6 +102,10 @@ class Win():
         self.screen.blit(surf, (25, 100))
         self.screen.blit(star, (225, 400))
         self.screen.blit(surf2, (175, 420))
+
+    def click(self, pos):
+        if 200 <= pos[0] <= 300 and 600 <= pos[1] <= 700:
+            return 'start'
 
     def star_plus(self):
         self.star_frame += 1
@@ -350,6 +354,9 @@ class level():
 
 class Level_Pick:
     def __init__(self):
+        f = open('progress.json', 'r', encoding='utf-8')
+        self.g = json.load(f)
+        f.close()
         self.background = load_image('textures/level_pcik_back.png')
         self.left = pygame.transform.scale(load_image('textures/left.png', (100, 100)), (100, 100))
         self.right = pygame.transform.scale(load_image('textures/right.png', (100, 100)), (100, 100))
@@ -361,12 +368,14 @@ class Level_Pick:
     def render(self, arg):
         surf = self.myfont1.render(str(int(self.level)), False, pygame.Color('red'))
         surf1 = self.myfont.render(str('Выберите уровень'), False, pygame.Color('red'))
+        surf2 = self.myfont.render(f'{self.g[str(self.level)]}/3', False, pygame.Color('yellow'))
         self.screen.fill((0, 0, 0))
         self.screen.blit(self.background, (0, 0))
         self.screen.blit(self.left, (0, 300))
         self.screen.blit(self.right, (400, 300))
         self.screen.blit(surf, (225, 300))
         self.screen.blit(surf1, (25, 100))
+        self.screen.blit(surf2, (220, 260))
         self.screen.blit(self.start, (125, 600))
 
     def click(self, pos):

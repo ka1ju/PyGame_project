@@ -55,7 +55,7 @@ while running:
             elif out == 'level':
                 g = walls_load(ms.level)
                 h = ms.level
-                ms = level(screen, g, f)
+                ms = level(screen, g, h)
             elif out == 'start':
                 ms = Level_Pick()
             elif out == 'shop':
