@@ -49,6 +49,13 @@ class MainScreen:
         self.img_shop_btn.rect.y = height // 2
         main_screen_sprites.add(self.img_shop_btn)
 
+        self.img_bag = pygame.sprite.Sprite()
+        self.img_bag.image = pygame.transform.scale(load_image('sprites/корзина.png'), (30, 30))
+        self.img_bag.rect = self.img_bag.image.get_rect()
+        self.img_bag.rect.x = (width - 50) // 2 + 10
+        self.img_bag.rect.y = height // 2 + 10
+        main_screen_sprites.add(self.img_bag)
+
         self.img_settings_btn = pygame.sprite.Sprite()
         self.img_settings_btn.image = pygame.transform.scale(load_image('sprites/img_settings_btn.png'), (50, 50))
         self.img_settings_btn.rect = self.img_settings_btn.image.get_rect()
