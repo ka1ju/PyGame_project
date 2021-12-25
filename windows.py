@@ -13,7 +13,7 @@ def load_image(name, color_key=None):
     image = pygame.image.load(fullname)
     return image
 
-
+pygame.init()
 main_screen_sprites = pygame.sprite.Group()
 
 background = pygame.sprite.Sprite()
@@ -22,6 +22,42 @@ background.rect = background.image.get_rect()
 background.rect.x = 0
 background.rect.y = 0
 main_screen_sprites.add(background)
+
+shop_sprites = pygame.sprite.Group()
+
+shop_sprites.add(background)
+
+player_sprites = pygame.sprite.Group()
+wall_sprites = pygame.sprite.Group()
+color_sprites = pygame.sprite.Group()
+
+
+class Level_Pick:
+    def __init__(self):
+        self.background = load_image('textures/level_pcik_back.png')
+        self.left = pygame.transform.scale(load_image('textures/left.png', (100, 100)), (100, 100))
+        self.right = pygame.transform.scale(load_image('textures/right.png', (100, 100)), (100, 100))
+        self.myfont1 = pygame.font.SysFont('arial', 100)
+        self.myfont = pygame.font.SysFont('arial', 50)
+        self.start = load_image('textures/start.png')
+        self.level = 1
+
+    def render(self, arg):
+        surf = self.myfont1.render(str(int(self.level)), False, pygame.Color('red'))
+        surf1 = self.myfont.render(str('Выберите уровень'), False, pygame.Color('red'))
+        self.screen.fill((0, 0, 0))
+        self.screen.blit(self.background, (0, 0))
+        self.screen.blit(self.left, (0, 300))
+        self.screen.blit(self.right, (400, 300))
+        self.screen.blit(surf, (225, 300))
+        self.screen.blit(surf1, (25, 100))
+        self.screen.blit(self.start, (125, 600))
+
+    def click(self, pos):
+        if 0 <= pos[0] <= 100 and 300 <= pos[1] <= 400:
+            self.level -= 1
+        elif 400 <= pos[0] <= 500 and 300 <= pos[1] <= 400:
+            self.level += 1
 
 
 class MainScreen:
@@ -99,13 +135,7 @@ class MainScreen:
             return 'exit'
 
 
-shop_sprites = pygame.sprite.Group()
 
-shop_sprites.add(background)
-
-player_sprites = pygame.sprite.Group()
-wall_sprites = pygame.sprite.Group()
-color_sprites = pygame.sprite.Group()
 
 
 class Shop:

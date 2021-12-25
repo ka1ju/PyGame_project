@@ -1,7 +1,7 @@
 import pygame
 import os
 import sys
-from windows import MainScreen, Shop
+from windows import MainScreen, Shop, Level_Pick
 
 pygame.display.set_caption('cube-lab')
 size = width, height = 500, 800
@@ -35,7 +35,7 @@ while running:
             if out == 'exit':
                 running = False
             elif out == 'start':
-                pass
+                ms = Level_Pick()
             elif out == 'shop':
                 ms = Shop()
                 ren = player_sprites
@@ -48,7 +48,7 @@ while running:
                 ren = wall_sprites
             elif out == 'color':
                 ren = color_sprites
-    if pygame.mouse.get_focused():
-        screen.blit(CURSOR, (pygame.mouse.get_pos()))
-        pygame.display.update()
-    pygame.display.flip()
+        if pygame.mouse.get_focused():
+            screen.blit(CURSOR, (pygame.mouse.get_pos()))
+            pygame.display.update()
+        pygame.display.flip()
