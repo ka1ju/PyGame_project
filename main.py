@@ -114,45 +114,45 @@ shop_sprites.add(background)
 class Shop:
     def __init__(self):
         self.img_player_btn = pygame.sprite.Sprite()
-        self.img_player_btn.image = pygame.transform.scale(load_image('sprites/img_player_btn.png'), (50, 50))
+        self.img_player_btn.image = pygame.transform.scale(load_image('sprites/img_player_btn.png'), (100, 100))
         self.img_player_btn.rect = self.img_player_btn.image.get_rect()
         self.img_player_btn.rect.x = 0
         self.img_player_btn.rect.y = 0
         shop_sprites.add(self.img_player_btn)
 
         self.img_player = pygame.sprite.Sprite()
-        self.img_player.image = pygame.transform.scale(load_image('sprites/img_player.png'), (30, 30))
+        self.img_player.image = pygame.transform.scale(load_image('sprites/img_player.png'), (50, 50))
         self.img_player.rect = self.img_player.image.get_rect()
-        self.img_player.rect.x = 10
-        self.img_player.rect.y = 7.5
+        self.img_player.rect.x = 25
+        self.img_player.rect.y = 20
         shop_sprites.add(self.img_player)
 
         self.img_wall_btn = pygame.sprite.Sprite()
-        self.img_wall_btn.image = pygame.transform.scale(load_image('sprites/img_wall_btn.png'), (50, 50))
+        self.img_wall_btn.image = pygame.transform.scale(load_image('sprites/img_wall_btn.png'), (100, 100))
         self.img_wall_btn.rect = self.img_wall_btn.image.get_rect()
-        self.img_wall_btn.rect.x = (width - 50) // 2
+        self.img_wall_btn.rect.x = (width - 100) // 2
         self.img_wall_btn.rect.y = 0
         shop_sprites.add(self.img_wall_btn)
 
         self.img_wall = pygame.sprite.Sprite()
-        self.img_wall.image = pygame.transform.scale(load_image('sprites/img_wall.png'), (30, 30))
+        self.img_wall.image = pygame.transform.scale(load_image('sprites/img_wall.png'), (70, 70))
         self.img_wall.rect = self.img_wall.image.get_rect()
-        self.img_wall.rect.x = (width - 50) // 2 + 10
-        self.img_wall.rect.y = 10
+        self.img_wall.rect.x = (width - 50) // 2 - 10
+        self.img_wall.rect.y = 15
         shop_sprites.add(self.img_wall)
 
         self.img_color_btn = pygame.sprite.Sprite()
-        self.img_color_btn.image = pygame.transform.scale(load_image('sprites/img_color_btn.png'), (50, 50))
+        self.img_color_btn.image = pygame.transform.scale(load_image('sprites/img_color_btn.png'), (100, 100))
         self.img_color_btn.rect = self.img_wall_btn.image.get_rect()
-        self.img_color_btn.rect.x = width - 50
+        self.img_color_btn.rect.x = width - 100
         self.img_color_btn.rect.y = 0
         shop_sprites.add(self.img_color_btn)
 
         self.img_color = pygame.sprite.Sprite()
-        self.img_color.image = pygame.transform.scale(load_image('sprites/капля.png'), (20, 28))
+        self.img_color.image = pygame.transform.scale(load_image('sprites/капля.png'), (40, 56))
         self.img_color.rect = self.img_color.image.get_rect()
-        self.img_color.rect.x = width - 35
-        self.img_color.rect.y = 10
+        self.img_color.rect.x = width - 70
+        self.img_color.rect.y = 20
         shop_sprites.add(self.img_color)
 
         self.img_shop_close_btn = pygame.sprite.Sprite()
@@ -173,12 +173,12 @@ class Shop:
         shop_sprites.draw(screen)
 
     def click(self, position):
-        if position[1] in range(0, 50):
-            if position[0] in range(0, 50):
+        if position[1] in range(0, 100):
+            if position[0] in range(0, 100):
                 return 'player'
-            elif position[0] in range((width - 50) // 2, (width - 50) // 2 + 50):
+            elif position[0] in range((width - 100) // 2, (width - 100) // 2 + 100):
                 return 'wall'
-            elif position[0] in range(width - 50, width):
+            elif position[0] in range(width - 100, width):
                 return 'color'
         elif position[1] in range(height - 50, height):
             if position[0] in range(width - 50, width):
