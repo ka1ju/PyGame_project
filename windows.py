@@ -1,6 +1,7 @@
 import pygame
 import os
 import sys
+import time
 
 size = width, height = 500, 800
 
@@ -62,25 +63,44 @@ first_is = True
 
 
 class Win():
-    def __init__(self, screen):
+    def __init__(self, screen, time):
+        self.star_frame = 0
+        self.time = time
         self.screen = screen
         self.background = load_image('textures/level_pcik_back.png')
         self.good = pygame.transform.scale(load_image('textures/good.png', (100, 100)), (100, 100))
         self.myfont1 = pygame.font.SysFont('arial', 70)
         self.myfont = pygame.font.SysFont('arial', 50)
+        self.k = 0
+        if time < 240:
+            self.k = 3
+        elif time < 360:
+            self.k = 2
+        else:
+            self.k = 1
 
     def render(self, arg):
+        star = pygame.transform.scale(load_image(f'star_animation/{self.star_frame}.gif', (100, 100)), (100, 100))
         surf = self.myfont1.render(str('ТЫ ПРОШЕЛ!'), False, pygame.Color('red'))
-        surf1 = self.myfont.render(str('Ну и молодец!'), False, pygame.Color('red'))
+        surf1 = self.myfont.render(str(f'Время: {round(self.time)}c.'), False, pygame.Color('red'))
+        surf2 = self.myfont1.render(str(f'{self.k}'), False, pygame.Color('yellow'))
         self.screen.fill((0, 0, 0))
         self.screen.blit(self.background, (0, 0))
         self.screen.blit(self.good, (200, 600))
         self.screen.blit(surf1, (100, 300))
         self.screen.blit(surf, (25, 100))
+        self.screen.blit(star, (225, 400))
+        self.screen.blit(surf2, (175, 420))
+
+    def star_plus(self):
+        self.star_frame += 1
+        if self.star_frame == 16:
+            self.star_frame = 0
 
 
 class level():
     def __init__(self, screen, walls):
+        self.time = time.time()
         self.scr = screen
         self.walls = walls
         self.all_sprites = pygame.sprite.Group()
@@ -210,7 +230,7 @@ class level():
             except UnboundLocalError:
                 pass
         if self.side == self.walls['win'][0] and self.user_coords == tuple(self.walls['win'][1]):
-            print('win')
+            return 'win'
 
     def step(self, u_pos, user_coords):
         f_u_pos = u_pos

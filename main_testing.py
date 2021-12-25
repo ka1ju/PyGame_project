@@ -2,6 +2,7 @@ import pygame
 import os
 import sys
 import json
+import time
 from windows import MainScreen, Shop, Level_Pick, level, Win
 
 pygame.display.set_caption('cube-lab')
@@ -20,7 +21,7 @@ wall_sprites = pygame.sprite.Group()
 color_sprites = pygame.sprite.Group()
 
 
-ms = Win(screen)
+ms = Win(screen, 0)
 ms.screen = screen
 ren = ''
 
@@ -33,6 +34,11 @@ def walls_load(ind):
     return g[ind]
 
 
+clock = pygame.time.Clock()
+
+star_up = pygame.USEREVENT + 25
+pygame.time.set_timer(star_up, 40)
+
 while running:
     for event in pygame.event.get():
         ms.screen = screen
@@ -44,7 +50,9 @@ while running:
             out = ms.click(place)
             if out == 'exit':
                 running = False
-            if out == 'level':
+            elif out == 'win':
+                ms = Win(screen, time.time() - ms.time)
+            elif out == 'level':
                 g = walls_load(ms.level)
                 ms = level(screen, g)
             elif out == 'start':
@@ -64,4 +72,8 @@ while running:
         if pygame.mouse.get_focused():
             screen.blit(CURSOR, (pygame.mouse.get_pos()))
             pygame.display.update()
+        if event.type == star_up and ms.__class__.__name__ == 'Win':
+            ms.star_plus()
+            pygame.display.flip()
         pygame.display.flip()
+    clock.tick(60)
