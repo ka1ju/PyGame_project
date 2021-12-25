@@ -58,6 +58,8 @@ class Level_Pick:
             self.level -= 1
         elif 400 <= pos[0] <= 500 and 300 <= pos[1] <= 400:
             self.level += 1
+        elif 125 <= pos[0] <= 385 and 600 <= pos[1] <= 745:
+            return 'level'
 
 
 class MainScreen:

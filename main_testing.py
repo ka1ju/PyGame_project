@@ -34,6 +34,8 @@ while running:
             out = ms.click(place)
             if out == 'exit':
                 running = False
+            if out == 'level':
+                print(ms.level)
             elif out == 'start':
                 ms = Level_Pick()
             elif out == 'shop':
