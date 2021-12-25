@@ -91,8 +91,10 @@ class MainScreen:
         self.img_close.rect.y = height - 37
         main_screen_sprites.add(self.img_close)
 
-    def render(self):
+    def render(self, arg):
         main_screen_sprites.draw(screen)
+        if ren != '':
+            arg.draw(screen)
 
     def click(self, position):
         if position[1] in range(height // 2 - 50, height // 2 + 50):
@@ -110,9 +112,16 @@ shop_sprites = pygame.sprite.Group()
 
 shop_sprites.add(background)
 
+player_sprites = pygame.sprite.Group()
+wall_sprites = pygame.sprite.Group()
+color_sprites = pygame.sprite.Group()
+
 
 class Shop:
     def __init__(self):
+        # спрайты магазина
+        self.type = 'shop'
+
         self.img_player_btn = pygame.sprite.Sprite()
         self.img_player_btn.image = pygame.transform.scale(load_image('sprites/img_player_btn.png'), (100, 100))
         self.img_player_btn.rect = self.img_player_btn.image.get_rect()
@@ -169,26 +178,47 @@ class Shop:
         self.img_close.rect.y = height - 37
         shop_sprites.add(self.img_close)
 
-    def render(self):
+        # спрайты персонажей
+        self.player_1 = pygame.sprite.Sprite()
+        self.player_1.image = pygame.transform.scale(load_image('sprites/player_1.png'), (50, 50))
+        self.player_1.rect = self.player_1.image.get_rect()
+        self.player_1.rect.x = 50
+        self.player_1.rect.y = 150
+        player_sprites.add(self.player_1)
+
+    def render(self, arg):
         shop_sprites.draw(screen)
+        if ren != '':
+            arg.draw(screen)
+
+    def player_render(self):
+        player_sprites.draw(screen)
 
     def click(self, position):
-        if position[1] in range(0, 100):
-            if position[0] in range(0, 100):
-                return 'player'
-            elif position[0] in range((width - 100) // 2, (width - 100) // 2 + 100):
-                return 'wall'
-            elif position[0] in range(width - 100, width):
-                return 'color'
-        elif position[1] in range(height - 50, height):
-            if position[0] in range(width - 50, width):
-                return 'shop_exit'
+        if self.type == 'shop':
+            if position[1] in range(0, 100):
+                if position[0] in range(0, 100):
+                    return 'player'
+                elif position[0] in range((width - 100) // 2, (width - 100) // 2 + 100):
+                    return 'wall'
+                elif position[0] in range(width - 100, width):
+                    return 'color'
+            elif position[1] in range(height - 50, height):
+                if position[0] in range(width - 50, width):
+                    return 'shop_exit'
+        elif self.type == 'player':
+            if position[1] in range(205, 220):
+                if position[0] in range(50, 100):
+                    return 'buy_player_1'
+                if position[1] in range(150, 200):
+                    return 'buy_player_2'
 
 
 ms = MainScreen()
+ren = ''
 
 while running:
-    ms.render()
+    ms.render(ren)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -201,8 +231,16 @@ while running:
                 pass
             elif out == 'shop':
                 ms = Shop()
+                ren = player_sprites
             elif out == 'shop_exit':
                 ms = MainScreen()
+                ren = ''
+            elif out == 'player':
+                ren = player_sprites
+            elif out == 'wall':
+                ren = wall_sprites
+            elif out == 'color':
+                ren = color_sprites
     if pygame.mouse.get_focused():
         screen.blit(CURSOR, (pygame.mouse.get_pos()))
         pygame.display.update()
