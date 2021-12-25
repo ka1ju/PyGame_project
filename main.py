@@ -42,6 +42,13 @@ class MainScreen:
         self.img_start_btn.rect.y = height // 2
         main_screen_sprites.add(self.img_start_btn)
 
+        self.img_start = pygame.sprite.Sprite()
+        self.img_start.image = pygame.transform.scale(load_image('sprites/play.png'), (40, 40))
+        self.img_start.rect = self.img_start.image.get_rect()
+        self.img_start.rect.x = 7
+        self.img_start.rect.y = height // 2 + 5
+        main_screen_sprites.add(self.img_start)
+
         self.img_shop_btn = pygame.sprite.Sprite()
         self.img_shop_btn.image = pygame.transform.scale(load_image('sprites/img_shop_btn.png'), (50, 50))
         self.img_shop_btn.rect = self.img_shop_btn.image.get_rect()
@@ -62,6 +69,13 @@ class MainScreen:
         self.img_settings_btn.rect.x = width - 50
         self.img_settings_btn.rect.y = height // 2
         main_screen_sprites.add(self.img_settings_btn)
+
+        self.img_settings = pygame.sprite.Sprite()
+        self.img_settings.image = pygame.transform.scale(load_image('sprites/settings.png'), (30, 30))
+        self.img_settings.rect = self.img_settings.image.get_rect()
+        self.img_settings.rect.x = width - 50 + 10
+        self.img_settings.rect.y = height // 2 + 10
+        main_screen_sprites.add(self.img_settings)
 
         self.img_game_close = pygame.sprite.Sprite()
         self.img_game_close.image = pygame.transform.scale(load_image('sprites/img_shop_close_btn.png'), (25, 25))
