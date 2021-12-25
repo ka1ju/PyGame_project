@@ -21,7 +21,7 @@ wall_sprites = pygame.sprite.Group()
 color_sprites = pygame.sprite.Group()
 
 
-ms = Win(screen, 0)
+ms = MainScreen()
 ms.screen = screen
 ren = ''
 
