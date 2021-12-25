@@ -2,6 +2,7 @@ import pygame
 import os
 import sys
 import time
+import json
 
 size = width, height = 500, 800
 
@@ -63,7 +64,7 @@ first_is = True
 
 
 class Win():
-    def __init__(self, screen, time):
+    def __init__(self, screen, time, level):
         self.star_frame = 0
         self.time = time
         self.screen = screen
@@ -78,6 +79,16 @@ class Win():
             self.k = 2
         else:
             self.k = 1
+        f = open('progress.json', 'r', encoding='utf-8')
+        g = json.load(f)
+        f.close()
+        f = open('progress.json', 'w', encoding='utf-8')
+        if g[str(level)] < self.k:
+            p = self.k - g[str(level)]
+            g[str(level)] = self.k
+            g['stars'] += p
+        json.dump(f, g)
+        f.close()
 
     def render(self, arg):
         star = pygame.transform.scale(load_image(f'star_animation/{self.star_frame}.gif', (100, 100)), (100, 100))
@@ -99,7 +110,8 @@ class Win():
 
 
 class level():
-    def __init__(self, screen, walls):
+    def __init__(self, screen, walls, level):
+        self.level = level
         self.time = time.time()
         self.scr = screen
         self.walls = walls

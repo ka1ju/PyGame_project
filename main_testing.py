@@ -51,10 +51,11 @@ while running:
             if out == 'exit':
                 running = False
             elif out == 'win':
-                ms = Win(screen, time.time() - ms.time)
+                ms = Win(screen, time.time() - ms.time, ms.level)
             elif out == 'level':
                 g = walls_load(ms.level)
-                ms = level(screen, g)
+                h = ms.level
+                ms = level(screen, g, f)
             elif out == 'start':
                 ms = Level_Pick()
             elif out == 'shop':
