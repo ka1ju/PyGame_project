@@ -182,16 +182,38 @@ class Shop:
         self.player_1 = pygame.sprite.Sprite()
         self.player_1.image = pygame.transform.scale(load_image('sprites/player_1.png'), (50, 50))
         self.player_1.rect = self.player_1.image.get_rect()
-        self.player_1.rect.x = 50
+        self.player_1.rect.x = 25
         self.player_1.rect.y = 150
         player_sprites.add(self.player_1)
 
         self.player_2 = pygame.sprite.Sprite()
         self.player_2.image = pygame.transform.scale(load_image('sprites/player_2.png'), (50, 50))
         self.player_2.rect = self.player_2.image.get_rect()
-        self.player_2.rect.x = 150
+        self.player_2.rect.x = 125
         self.player_2.rect.y = 150
         player_sprites.add(self.player_2)
+
+        # спрайты стен
+        self.wall_1 = pygame.sprite.Sprite()
+        self.wall_1.image = pygame.transform.scale(load_image('sprites/wall_1.png'), (50, 50))
+        self.wall_1.rect = self.wall_1.image.get_rect()
+        self.wall_1.rect.x = 25
+        self.wall_1.rect.y = 150
+        wall_sprites.add(self.wall_1)
+
+        self.wall_2 = pygame.sprite.Sprite()
+        self.wall_2.image = pygame.transform.scale(load_image('sprites/wall_2.png'), (50, 50))
+        self.wall_2.rect = self.wall_2.image.get_rect()
+        self.wall_2.rect.x = 125
+        self.wall_2.rect.y = 150
+        wall_sprites.add(self.wall_2)
+
+        self.wall_3 = pygame.sprite.Sprite()
+        self.wall_3.image = pygame.transform.scale(load_image('sprites/wall_3.png'), (50, 50))
+        self.wall_3.rect = self.wall_3.image.get_rect()
+        self.wall_3.rect.x = 225
+        self.wall_3.rect.y = 150
+        wall_sprites.add(self.wall_3)
 
     def render(self, arg):
         shop_sprites.draw(screen)
