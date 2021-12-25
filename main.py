@@ -193,6 +193,13 @@ class Shop:
         self.player_2.rect.y = 150
         player_sprites.add(self.player_2)
 
+        self.player_3 = pygame.sprite.Sprite()
+        self.player_3.image = pygame.transform.scale(load_image('sprites/player_3.png'), (50, 50))
+        self.player_3.rect = self.player_3.image.get_rect()
+        self.player_3.rect.x = 225
+        self.player_3.rect.y = 150
+        player_sprites.add(self.player_3)
+
         # спрайты стен
         self.wall_1 = pygame.sprite.Sprite()
         self.wall_1.image = pygame.transform.scale(load_image('sprites/wall_1.png'), (50, 50))
