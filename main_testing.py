@@ -23,6 +23,8 @@ color_sprites = pygame.sprite.Group()
 ms = MainScreen()
 ms.screen = screen
 ren = ''
+
+
 def walls_load(ind):
     ind -= 1
     f = open('levels.json', 'r', encoding='utf-8')
