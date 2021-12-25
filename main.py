@@ -203,6 +203,7 @@ while running:
                 ms = Shop()
             elif out == 'shop_exit':
                 ms = MainScreen()
-    screen.blit(CURSOR, (pygame.mouse.get_pos()))
-    pygame.display.update()
+    if pygame.mouse.get_focused():
+        screen.blit(CURSOR, (pygame.mouse.get_pos()))
+        pygame.display.update()
     pygame.display.flip()
