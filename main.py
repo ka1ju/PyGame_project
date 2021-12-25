@@ -186,13 +186,17 @@ class Shop:
         self.player_1.rect.y = 150
         player_sprites.add(self.player_1)
 
+        self.player_2 = pygame.sprite.Sprite()
+        self.player_2.image = pygame.transform.scale(load_image('sprites/player_2.png'), (50, 50))
+        self.player_2.rect = self.player_2.image.get_rect()
+        self.player_2.rect.x = 150
+        self.player_2.rect.y = 150
+        player_sprites.add(self.player_2)
+
     def render(self, arg):
         shop_sprites.draw(screen)
         if ren != '':
             arg.draw(screen)
-
-    def player_render(self):
-        player_sprites.draw(screen)
 
     def click(self, position):
         if self.type == 'shop':
