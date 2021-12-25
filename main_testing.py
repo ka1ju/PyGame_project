@@ -1,7 +1,8 @@
 import pygame
 import os
 import sys
-from windows import MainScreen, Shop, Level_Pick
+import json
+from windows import MainScreen, Shop, Level_Pick, level
 
 pygame.display.set_caption('cube-lab')
 size = width, height = 500, 800
@@ -22,6 +23,13 @@ color_sprites = pygame.sprite.Group()
 ms = MainScreen()
 ms.screen = screen
 ren = ''
+def walls_load(ind):
+    ind -= 1
+    f = open('levels.json', 'r', encoding='utf-8')
+    g = json.load(f)
+    f.close()
+    return g[ind]
+
 
 while running:
     for event in pygame.event.get():
@@ -35,7 +43,8 @@ while running:
             if out == 'exit':
                 running = False
             if out == 'level':
-                print(ms.level)
+                g = walls_load(ms.level)
+                ms = level(screen, g)
             elif out == 'start':
                 ms = Level_Pick()
             elif out == 'shop':
