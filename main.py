@@ -65,18 +65,21 @@ while running:
                 ms = Win(screen, time.time() - ms.time, ms.level)
             elif out == 'level':
                 g = walls_load(ms.level)
-                h = ms.level
-                ms = level(screen, g, h)
+                achievements = ms.level
+                ms = level(screen, g, achievements)
             elif out == 'start':
                 ms = Level_Pick()
             elif out == 'shop':
                 ms = Shop(s=screen)
                 ren = ms.player_sprites
-                money = json.load(open('progress.json', 'r', encoding='utf-8'))['stars']
-                h = open('achievements.json', 'r', encoding='utf-8')
-                cost = json.load(h)
-                h.close()
-                h = open('achievements.json', 'w', encoding='utf-8')
+                my_money = open('progress.json', 'r', encoding='utf-8')
+                money = json.load(my_money)
+                my_money.close()
+                my_money = open('progress.json', 'w', encoding='utf-8')
+                achievements = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(achievements)
+                achievements.close()
+                achievements = open('achievements.json', 'w', encoding='utf-8')
             elif out == 'shop_exit':
                 ms = MainScreen(s=screen)
                 ren = ''
@@ -87,18 +90,23 @@ while running:
             elif out == 'color':
                 ren = ms.color_sprites
             elif out == 'buy_player_1':
-                if money >= cost['players']['player_1']['cost']:
-                    money -= cost['players']['player_1']['cost']
+                if money['stars'] >= cost['players']['player_1']['cost']:
+                    money['stars'] -= cost['players']['player_1']['cost']
                     cost['players']['player_1']['opened'] = 1
-                json.dump(cost, h)
+                json.dump(cost, achievements)
+                json.dump(money, my_money)
             elif out == 'buy_player_2':
-                if money >= cost['players']['player_2']['cost']:
-                    money -= cost['players']['player_2']['cost']
+                if money['stars'] >= cost['players']['player_2']['cost']:
+                    money['stars'] -= cost['players']['player_2']['cost']
                     cost['players']['player_2']['opened'] = 1
+                json.dump(cost, achievements)
+                json.dump(money, my_money)
             elif out == 'buy_player_3':
-                if money >= cost['players']['player_3']['cost']:
-                    money -= cost['players']['player_3']['cost']
+                if money['stars'] >= cost['players']['player_3']['cost']:
+                    money['stars'] -= cost['players']['player_3']['cost']
                     cost['players']['player_3']['opened'] = 1
+                json.dump(cost, achievements)
+                json.dump(money, my_money)
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
             pygame.display.flip()
