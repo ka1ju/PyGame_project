@@ -363,7 +363,7 @@ while running:
             elif out == 'color':
                 ren = color_sprites
             elif out == 'buy_player_1':
-                print(out)
+                money = open('progress.json', )
             elif out == 'buy_player_2':
                 print(out)
             elif out == 'buy_player_3':
