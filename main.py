@@ -73,7 +73,10 @@ while running:
                 ms = Shop(s=screen)
                 ren = ms.player_sprites
                 money = json.load(open('progress.json', 'r', encoding='utf-8'))['stars']
-                cost = json.load(open('achievements.json', 'r', encoding='utf-8'))
+                h = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(h)
+                h.close()
+                h = open('achievements.json', 'w', encoding='utf-8')
             elif out == 'shop_exit':
                 ms = MainScreen(s=screen)
                 ren = ''
@@ -87,7 +90,7 @@ while running:
                 if money >= cost['players']['player_1']['cost']:
                     money -= cost['players']['player_1']['cost']
                     cost['players']['player_1']['opened'] = 1
-
+                json.dump(cost, h)
             elif out == 'buy_player_2':
                 if money >= cost['players']['player_2']['cost']:
                     money -= cost['players']['player_2']['cost']
