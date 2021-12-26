@@ -219,7 +219,6 @@ class level():
                 sprite.image = load_image("textures/finish.png")
                 sprite.rect = pygame.Rect((self.walls['win'][1][0], self.walls['win'][1][1], 50, 50))
                 self.all_sprites.add(sprite)
-            print('chech')
 
         self.first_is = False
         self.all_sprites.draw(self.scr)
