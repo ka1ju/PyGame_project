@@ -32,7 +32,7 @@ color_sprites = pygame.sprite.Group()
 
 
 ren = ''
-ms = MainScreen()
+ms = MainScreen(s=screen)
 ms.screen = screen
 
 
@@ -75,11 +75,11 @@ while running:
             elif out == 'start':
                 ms = Level_Pick()
             elif out == 'shop':
-                ms = Shop()
+                ms = Shop(s=screen)
                 ren = player_sprites
                 money = json.load(open('progress.json', 'r', encoding='utf-8'))['stars']
             elif out == 'shop_exit':
-                ms = MainScreen()
+                ms = MainScreen(s=screen)
                 ren = ''
             elif out == 'player':
                 ren = player_sprites
