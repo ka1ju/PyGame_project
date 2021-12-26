@@ -466,7 +466,9 @@ class Level_Pick:
 
 ren = ''
 class MainScreen:
-    def __init__(self):
+    def __init__(self, s):
+        self.screen = s
+
         self.img_start_btn = pygame.sprite.Sprite()
         self.img_start_btn.image = pygame.transform.scale(load_image('sprites/img_start_btn.png'), (100, 100))
         self.img_start_btn.rect = self.img_start_btn.image.get_rect()
@@ -524,9 +526,9 @@ class MainScreen:
         main_screen_sprites.add(self.img_close)
 
     def render(self, arg):
-        main_screen_sprites.draw(screen)
+        main_screen_sprites.draw(self.screen)
         if arg != '':
-            arg.draw(screen)
+            arg.draw(self.screen)
 
     def click(self, position):
         if position[1] in range(height // 2 - 50, height // 2 + 50):
@@ -550,9 +552,10 @@ color_sprites = pygame.sprite.Group()
 
 
 class Shop:
-    def __init__(self):
+    def __init__(self, s):
         # спрайты магазина
         self.type = 'player'
+        self.screen = s
 
         self.img_player_btn = pygame.sprite.Sprite()
         self.img_player_btn.image = pygame.transform.scale(load_image('sprites/img_player_btn.png'), (100, 100))
@@ -745,9 +748,9 @@ class Shop:
         wall_sprites.add(self.wall_3)
 
     def render(self, arg):
-        shop_sprites.draw(screen)
+        shop_sprites.draw(self.screen)
         if arg != '':
-            arg.draw(screen)
+            arg.draw(self.screen)
 
     def click(self, position):
         if position[1] in range(0, 100):
