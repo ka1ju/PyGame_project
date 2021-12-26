@@ -542,14 +542,11 @@ class MainScreen:
             return 'exit'
 
 
-shop_sprites = pygame.sprite.Group()
-
-shop_sprites.add(background)
-
 class Shop:
     def __init__(self, s):
         # спрайты магазина
         self.type = 'player'
+
         self.screen = s
 
         self.img_player_btn = pygame.sprite.Sprite()
