@@ -63,6 +63,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             place = event.pos
             out = ms.click(place)
+            print(out)
             if out == 'exit':
                 running = False
             elif out == 'win':
@@ -77,7 +78,6 @@ while running:
                 ms = Shop()
                 ren = player_sprites
                 money = json.load(open('progress.json', 'r', encoding='utf-8'))['stars']
-                achievements_r = json.load(open('achievements.json', 'r'))
             elif out == 'shop_exit':
                 ms = MainScreen()
                 ren = ''
@@ -88,8 +88,7 @@ while running:
             elif out == 'color':
                 ren = color_sprites
             elif out == 'buy_player_1':
-                if money >= ms.player_1_cost:
-                    achievements_r['players']['player_1'] = "1"
+                print(out)
             elif out == 'buy_player_2':
                 print(out)
             elif out == 'buy_player_3':

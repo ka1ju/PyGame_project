@@ -525,7 +525,7 @@ class MainScreen:
 
     def render(self, arg):
         main_screen_sprites.draw(screen)
-        if ren != '':
+        if arg != '':
             arg.draw(screen)
 
     def click(self, position):
@@ -746,7 +746,7 @@ class Shop:
 
     def render(self, arg):
         shop_sprites.draw(screen)
-        if ren != '':
+        if arg != '':
             arg.draw(screen)
 
     def click(self, position):
