@@ -546,11 +546,6 @@ shop_sprites = pygame.sprite.Group()
 
 shop_sprites.add(background)
 
-player_sprites = pygame.sprite.Group()
-wall_sprites = pygame.sprite.Group()
-color_sprites = pygame.sprite.Group()
-
-
 class Shop:
     def __init__(self, s):
         # спрайты магазина
