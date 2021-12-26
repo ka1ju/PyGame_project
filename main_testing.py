@@ -3,12 +3,22 @@ import os
 import sys
 import json
 import time
-from windows import MainScreen, Shop, Level_Pick, level, Win
+from windows import MainScreen, Shop, Level_Pick, level, Win, Bad
 
 pygame.display.set_caption('cube-lab')
 size = width, height = 500, 800
 screen = pygame.display.set_mode(size)
 running = True
+
+
+def load_image(name, color_key=None):
+    fullname = os.path.join('', name)
+    if not os.path.isfile(fullname):
+        print(f"Файл с изображением '{fullname}' не найден")
+        sys.exit()
+    image = pygame.image.load(fullname)
+    return image
+
 
 screen.fill(pygame.Color('purple'))
 
@@ -38,11 +48,16 @@ clock = pygame.time.Clock()
 
 star_up = pygame.USEREVENT + 25
 pygame.time.set_timer(star_up, 40)
+mines = pygame.USEREVENT + 26
+pygame.time.set_timer(mines, 500)
 
 while running:
+    ms.screen = screen
+    ms.render(ren)
     for event in pygame.event.get():
-        ms.screen = screen
-        ms.render(ren)
+        if pygame.mouse.get_focused():
+            screen.blit(CURSOR, (pygame.mouse.get_pos()))
+            pygame.display.flip()
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
@@ -70,11 +85,14 @@ while running:
                 ren = wall_sprites
             elif out == 'color':
                 ren = color_sprites
-        if pygame.mouse.get_focused():
-            screen.blit(CURSOR, (pygame.mouse.get_pos()))
-            pygame.display.update()
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
             pygame.display.flip()
-        pygame.display.flip()
+        if event.type == mines and ms.__class__.__name__ == 'level' and (ms.mines_active != [] or ms.mines_deactive != []):
+            g = ms.mineses()
+            if g == 'died':
+                ms = Bad(screen)
+    if pygame.mouse.get_focused():
+        screen.blit(CURSOR, (pygame.mouse.get_pos()))
+        pygame.display.update()
     clock.tick(60)

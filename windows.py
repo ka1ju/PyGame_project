@@ -63,6 +63,24 @@ wall = pygame.image.load("textures/wall.jpg").convert_alpha()
 first_is = True
 
 
+class Bad():
+    def __init__(self, screen):
+        self.screen = screen
+        self.background = load_image('textures/level_pcik_back.png')
+        self.myfont1 = pygame.font.SysFont('arial', 50)
+        self.good = pygame.transform.scale(load_image('textures/good.png', (100, 100)), (100, 100))
+
+    def render(self, arg):
+        surf = self.myfont1.render(str('ТЫ ПОДОРВАЛСЯ:('), False, pygame.Color('red'))
+        self.screen.blit(self.background, (0, 0))
+        self.screen.blit(self.good, (200, 600))
+        self.screen.blit(surf, (25, 100))
+
+    def click(self, pos):
+        if 200 <= pos[0] <= 300 and 600 <= pos[1] <= 700:
+            return 'start'
+
+
 class Win():
     def __init__(self, screen, time, level):
         self.star_frame = 0
@@ -115,6 +133,21 @@ class Win():
 
 class level():
     def __init__(self, screen, walls, level):
+        self.mines_already = {"front": [],
+                              "up": [],
+                              "right": [],
+                              "back": [],
+                              "left":[],
+                              "down":[]}
+        self.k = []
+        f = open('mines.json', 'r', encoding='utf-8')
+        d = json.load(f)
+        f.close()
+        self.mines_activesprites = []
+        self.mines_deactivesprites = []
+        self.mines = d[level - 1]
+        self.mines_active = []
+        self.mines_deactive = []
         self.level = level
         self.time = time.time()
         self.scr = screen
@@ -172,15 +205,22 @@ class level():
         self.scr.blit(self.choose, self.chxy)
         self.scr.blit(self.user, self.u_pos[1])
         if self.first_is:
+            self.mines_active = []
+            self.mines_deactive = []
+            self.mines_deactivesprites = []
+            self.mines_activesprites = []
             for el in self.walls[self.flag]:
                 sprite = pygame.sprite.Sprite()
                 sprite.image = load_image("textures/wall.jpg")
                 sprite.rect = pygame.Rect((el[0], el[1], 50, 50))
                 self.all_sprites.add(sprite)
             if self.flag == self.walls['win'][0]:
+                sprite = pygame.sprite.Sprite()
                 sprite.image = load_image("textures/finish.png")
                 sprite.rect = pygame.Rect((self.walls['win'][1][0], self.walls['win'][1][1], 50, 50))
                 self.all_sprites.add(sprite)
+            print('chech')
+
         self.first_is = False
         self.all_sprites.draw(self.scr)
         ct = self.check_turn()
@@ -247,6 +287,16 @@ class level():
                 pass
         if self.side == self.walls['win'][0] and self.user_coords == tuple(self.walls['win'][1]):
             return 'win'
+        if list(self.user_coords) in self.mines[self.flag] and list(self.user_coords) not in self.mines_already[self.flag]:
+            self.mines_already[self.flag].append(list(self.user_coords))
+            self.mines_active.append(list(self.user_coords))
+            self.mines[self.flag].remove(list(self.user_coords))
+            sprite = pygame.sprite.Sprite()
+            sprite.image = load_image("textures/mine.png")
+            sprite.rect = pygame.Rect((self.user_coords[0], self.user_coords[1], 50, 50))
+            self.mines_activesprites.append(sprite)
+            self.all_sprites.add(sprite)
+            self.timer = time.time()
 
     def step(self, u_pos, user_coords):
         f_u_pos = u_pos
@@ -278,6 +328,31 @@ class level():
                     if pygame.sprite.spritecollideany(usr, self.all_sprites) is None:
                         return self.user_coords, self.u_pos
         return f_user_coords, f_u_pos
+
+    def mineses(self):
+        k = 0
+        if time.time() - self.timer > 1.5:
+            if list(self.user_coords) in self.mines_active or list(self.user_coords) in self.mines_deactive:
+                k = 1
+            for en in self.mines_activesprites:
+                self.all_sprites.remove(en)
+            self.mines_active = []
+            self.mines_deactive = []
+            self.mines_deactivesprites = []
+            self.mines_activesprites = []
+        if self.mines_active:
+            for en in self.mines_activesprites:
+                g = [en.rect.x, en.rect.y]
+                if g in self.mines_active:
+                    self.all_sprites.add(en)
+        if self.mines_deactive:
+            for en in self.mines_activesprites:
+                g = [en.rect.x, en.rect.y]
+                if g in self.mines_deactive:
+                    self.all_sprites.remove(en)
+        self.mines_deactive, self.mines_active = self.mines_active, self.mines_deactive
+        if k == 1:
+            return 'died'
 
     def turnit(self, u_pos):
         if self.up_flag and 227 <= self.pos[0] <= 275 and 3 <= self.pos[1] <= 15:
