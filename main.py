@@ -31,9 +31,9 @@ wall_sprites = pygame.sprite.Group()
 color_sprites = pygame.sprite.Group()
 
 
+ren = ''
 ms = MainScreen()
 ms.screen = screen
-ren = ''
 
 
 def walls_load(ind):
