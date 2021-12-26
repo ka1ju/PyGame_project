@@ -739,7 +739,7 @@ class Shop:
         self.wall_sprites.add(self.wall_3)
 
     def render(self, arg):
-        shop_sprites.draw(self.screen)
+        self.shop_sprites.draw(self.screen)
         if arg != '':
             arg.draw(self.screen)
 

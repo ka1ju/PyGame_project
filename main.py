@@ -26,10 +26,6 @@ CURSOR = pygame.image.load("sprites/img_cursor.png").convert_alpha()
 pygame.mouse.set_cursor((8, 8), (4, 4), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
 pygame.mouse.set_visible(False)
 
-player_sprites = pygame.sprite.Group()
-wall_sprites = pygame.sprite.Group()
-color_sprites = pygame.sprite.Group()
-
 
 ren = ''
 ms = MainScreen(s=screen)
@@ -76,17 +72,17 @@ while running:
                 ms = Level_Pick()
             elif out == 'shop':
                 ms = Shop(s=screen)
-                ren = player_sprites
+                ren = ms.player_sprites
                 money = json.load(open('progress.json', 'r', encoding='utf-8'))['stars']
             elif out == 'shop_exit':
                 ms = MainScreen(s=screen)
                 ren = ''
             elif out == 'player':
-                ren = player_sprites
+                ren = ms.player_sprites
             elif out == 'wall':
-                ren = wall_sprites
+                ren = ms,wall_sprites
             elif out == 'color':
-                ren = color_sprites
+                ren = ms.color_sprites
             elif out == 'buy_player_1':
                 print(out)
             elif out == 'buy_player_2':
