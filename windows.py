@@ -464,7 +464,7 @@ class Level_Pick:
         elif 125 <= pos[0] <= 385 and 600 <= pos[1] <= 745:
             return 'level'
 
-
+ren = ''
 class MainScreen:
     def __init__(self):
         self.img_start_btn = pygame.sprite.Sprite()
