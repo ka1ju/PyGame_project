@@ -94,5 +94,6 @@ while running:
                 ms = Bad(screen)
     if pygame.mouse.get_focused():
         screen.blit(CURSOR, (pygame.mouse.get_pos()))
-        pygame.display.update()
+        pygame.display.flip()
+    pygame.display.flip()
     clock.tick(60)
