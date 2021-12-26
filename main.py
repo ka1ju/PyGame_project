@@ -78,7 +78,6 @@ while running:
                 ren = player_sprites
                 money = json.load(open('progress.json', 'r', encoding='utf-8'))['stars']
                 achievements_r = json.load(open('achievements.json', 'r'))
-                achievements_w = json.load(open('achievements.json', 'w'))
             elif out == 'shop_exit':
                 ms = MainScreen()
                 ren = ''
