@@ -1,6 +1,7 @@
 import pygame
 import os
 import sys
+import json
 
 pygame.display.set_caption('cube-lab')
 size = width, height = 500, 800
@@ -179,6 +180,8 @@ class Shop:
         shop_sprites.add(self.img_close)
 
         # спрайты персонажей
+        self.player_1_cost = 1
+
         self.player_1 = pygame.sprite.Sprite()
         self.player_1.image = pygame.transform.scale(load_image('sprites/player_1.png'), (50, 50))
         self.player_1.rect = self.player_1.image.get_rect()
@@ -214,6 +217,8 @@ class Shop:
         self.choose_player_1.rect.y = 215
         player_sprites.add(self.choose_player_1)
 
+        self.player_2_cost = 2
+
         self.player_2 = pygame.sprite.Sprite()
         self.player_2.image = pygame.transform.scale(load_image('sprites/player_2.png'), (50, 50))
         self.player_2.rect = self.player_2.image.get_rect()
@@ -248,6 +253,8 @@ class Shop:
         self.choose_player_2.rect.x = 155
         self.choose_player_2.rect.y = 215
         player_sprites.add(self.choose_player_2)
+
+        self.player_3_cost = 3
 
         self.player_3 = pygame.sprite.Sprite()
         self.player_3.image = pygame.transform.scale(load_image('sprites/player_3.png'), (50, 50))
@@ -353,6 +360,9 @@ while running:
             elif out == 'shop':
                 ms = Shop()
                 ren = player_sprites
+                money = json.load(open('progress.json', 'r', encoding='utf-8'))['stars']
+                achievements_r = json.load(open('achievements.json', 'r'))
+                achievements_w = json.load(open('achievements.json', 'w'))
             elif out == 'shop_exit':
                 ms = MainScreen()
                 ren = ''
@@ -363,7 +373,8 @@ while running:
             elif out == 'color':
                 ren = color_sprites
             elif out == 'buy_player_1':
-                money = open('progress.json', )
+                if money >= ms.player_1_cost:
+                    achievements_r['players']['player_1'] = "1"
             elif out == 'buy_player_2':
                 print(out)
             elif out == 'buy_player_3':
