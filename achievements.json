@@ -1,15 +1,15 @@
-{"players":
-  {
+{
+  "players": {
     "player_1": {
       "cost": 1,
       "opened": 0
     },
     "player_2": {
-      "cost": 2,
+      "cost": 1,
       "opened": 0
     },
     "player_3": {
-      "cost": 3,
+      "cost": 1,
       "opened": 0
     }
   }

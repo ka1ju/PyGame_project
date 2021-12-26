@@ -84,19 +84,18 @@ while running:
             elif out == 'color':
                 ren = ms.color_sprites
             elif out == 'buy_player_1':
-                print(money)
-                print(cost)
-                print(cost['players']['player_1']['cost'])
                 if money >= cost['players']['player_1']['cost']:
                     money -= cost['players']['player_1']['cost']
                     cost['players']['player_1']['opened'] = 1
-                print(money)
-                print(cost)
-                print(cost['players']['player_1']['cost'])
+
             elif out == 'buy_player_2':
-                print(out)
+                if money >= cost['players']['player_2']['cost']:
+                    money -= cost['players']['player_2']['cost']
+                    cost['players']['player_2']['opened'] = 1
             elif out == 'buy_player_3':
-                print(out)
+                if money >= cost['players']['player_3']['cost']:
+                    money -= cost['players']['player_3']['cost']
+                    cost['players']['player_3']['opened'] = 1
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
             pygame.display.flip()
