@@ -140,6 +140,26 @@ while running:
                     name = open('player.txt', 'r').read()
                     prev_player.save('textures/' + name)
                     player.save('textures/user.png')
+            elif out == 'choose_player_2':
+                achievements = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(achievements)
+                achievements.close()
+                if cost['players']['player_2']['opened'] == 1:
+                    player = Image.open('textures/player_2.png')
+                    prev_player = Image.open('textures/user.png')
+                    name = open('player.txt', 'r').read()
+                    prev_player.save('textures/' + name)
+                    player.save('textures/user.png')
+            elif out == 'choose_player_3':
+                achievements = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(achievements)
+                achievements.close()
+                if cost['players']['player_3']['opened'] == 1:
+                    player = Image.open('textures/player_3.png')
+                    prev_player = Image.open('textures/user.png')
+                    name = open('player.txt', 'r').read()
+                    prev_player.save('textures/' + name)
+                    player.save('textures/user.png')
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
             pygame.display.flip()
