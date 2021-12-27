@@ -72,14 +72,6 @@ while running:
             elif out == 'shop':
                 ms = Shop(s=screen)
                 ren = ms.player_sprites
-                my_money = open('progress.json', 'r', encoding='utf-8')
-                money = json.load(my_money)
-                my_money.close()
-                my_money = open('progress.json', 'w', encoding='utf-8')
-                achievements = open('achievements.json', 'r', encoding='utf-8')
-                cost = json.load(achievements)
-                achievements.close()
-                achievements = open('achievements.json', 'w', encoding='utf-8')
             elif out == 'shop_exit':
                 ms = MainScreen(s=screen)
                 ren = ''
@@ -90,23 +82,53 @@ while running:
             elif out == 'color':
                 ren = ms.color_sprites
             elif out == 'buy_player_1':
+                my_money = open('progress.json', 'r', encoding='utf-8')
+                money = json.load(my_money)
+                my_money.close()
+                my_money = open('progress.json', 'w', encoding='utf-8')
+                achievements = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(achievements)
+                achievements.close()
+                achievements = open('achievements.json', 'w', encoding='utf-8')
                 if money['stars'] >= cost['players']['player_1']['cost']:
                     money['stars'] -= cost['players']['player_1']['cost']
                     cost['players']['player_1']['opened'] = 1
                 json.dump(cost, achievements)
                 json.dump(money, my_money)
+                my_money.close()
+                achievements.close()
             elif out == 'buy_player_2':
+                my_money = open('progress.json', 'r', encoding='utf-8')
+                money = json.load(my_money)
+                my_money.close()
+                my_money = open('progress.json', 'w', encoding='utf-8')
+                achievements = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(achievements)
+                achievements.close()
+                achievements = open('achievements.json', 'w', encoding='utf-8')
                 if money['stars'] >= cost['players']['player_2']['cost']:
                     money['stars'] -= cost['players']['player_2']['cost']
                     cost['players']['player_2']['opened'] = 1
                 json.dump(cost, achievements)
                 json.dump(money, my_money)
+                my_money.close()
+                achievements.close()
             elif out == 'buy_player_3':
+                my_money = open('progress.json', 'r', encoding='utf-8')
+                money = json.load(my_money)
+                my_money.close()
+                my_money = open('progress.json', 'w', encoding='utf-8')
+                achievements = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(achievements)
+                achievements.close()
+                achievements = open('achievements.json', 'w', encoding='utf-8')
                 if money['stars'] >= cost['players']['player_3']['cost']:
                     money['stars'] -= cost['players']['player_3']['cost']
                     cost['players']['player_3']['opened'] = 1
                 json.dump(cost, achievements)
                 json.dump(money, my_money)
+                my_money.close()
+                achievements.close()
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
             pygame.display.flip()
