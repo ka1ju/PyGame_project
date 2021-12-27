@@ -137,7 +137,11 @@ while running:
                 if cost['players']['player_1']['opened'] == 1:
                     player = Image.open('textures/player_1.png')
                     prev_player = Image.open('textures/user.png')
-                    name = open('player.txt', 'r').read()
+                    n = open('player.txt', 'r', encoding='utf-8')
+                    name = n.read()
+                    n.close()
+                    n = open('player.txt', 'w', encoding='utf-8')
+                    n.write('player_1')
                     prev_player.save('textures/' + name)
                     player.save('textures/user.png')
             elif out == 'choose_player_2':
@@ -147,7 +151,11 @@ while running:
                 if cost['players']['player_2']['opened'] == 1:
                     player = Image.open('textures/player_2.png')
                     prev_player = Image.open('textures/user.png')
-                    name = open('player.txt', 'r').read()
+                    n = open('player.txt', 'r', encoding='utf-8')
+                    name = n.read()
+                    n.close()
+                    n = open('player.txt', 'w', encoding='utf-8')
+                    n.write('player_2')
                     prev_player.save('textures/' + name)
                     player.save('textures/user.png')
             elif out == 'choose_player_3':
@@ -157,7 +165,11 @@ while running:
                 if cost['players']['player_3']['opened'] == 1:
                     player = Image.open('textures/player_3.png')
                     prev_player = Image.open('textures/user.png')
-                    name = open('player.txt', 'r').read()
+                    n = open('player.txt', 'r', encoding='utf-8')
+                    name = n.read()
+                    n.close()
+                    n = open('player.txt', 'w', encoding='utf-8')
+                    n.write('player_3')
                     prev_player.save('textures/' + name)
                     player.save('textures/user.png')
         if event.type == star_up and ms.__class__.__name__ == 'Win':
