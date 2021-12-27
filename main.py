@@ -4,6 +4,7 @@ import sys
 import json
 import time
 from windows import MainScreen, Shop, Level_Pick, level, Win, Bad
+from PIL import Image
 
 pygame.display.set_caption('cube-lab')
 size = width, height = 500, 800
@@ -128,6 +129,14 @@ while running:
                 json.dump(cost, achievements)
                 json.dump(money, my_money)
                 my_money.close()
+                achievements.close()
+            elif out == 'choose_player_1':
+                achievements = open('achievements.json', 'r', encoding='utf-8')
+                cost = json.load(achievements)
+                achievements.close()
+                achievements = open('achievements.json', 'w', encoding='utf-8')
+                if cost['players']['player_1']['opened'] == 1:
+                    player = Image.open('sprites/player_1.png')
                 achievements.close()
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
