@@ -130,8 +130,8 @@ class level():
                               "up": [],
                               "right": [],
                               "back": [],
-                              "left":[],
-                              "down":[]}
+                              "left": [],
+                              "down": []}
         self.k = []
         f = open('mines.json', 'r', encoding='utf-8')
         d = json.load(f)
@@ -176,12 +176,14 @@ class level():
         elif 198 <= pos[0] <= 225 and 705 <= pos[1] <= 763:  # left
             self.chxy = (206, 706)
             self.posxy = (75, 15)
-            upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "left", self.side)
+            upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "left",
+                      self.side)
             self.choose, self.flag, self.field, self.user = upp[0], upp[1], upp[2], upp[3]
         elif 254 <= pos[0] <= 280 and 706 <= pos[1] <= 763:  # right
             self.chxy = (261, 706)
             self.posxy = (75, 15)
-            upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "right", self.side)
+            upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "right",
+                      self.side)
             self.choose, self.flag, self.field, self.user = upp[0], upp[1], upp[2], upp[3]
         elif 226 <= pos[0] <= 252 and 765 <= pos[1] <= 794:  # down
             self.chxy = (234, 765)
@@ -255,12 +257,14 @@ class level():
 
     def click(self, pos):
         self.pos = pos
-        if (self.pos[1] > self.posxy[1] + 350 and self.flag == "up" or self.flag == "down") or self.pos[1] > self.posxy[1] + 650:
+        if (self.pos[1] > self.posxy[1] + 350 and self.flag == "up" or self.flag == "down") or self.pos[1] > self.posxy[
+            1] + 650:
             try:
                 self.first_is = True
                 self.all_sprites.remove(*[el for el in self.all_sprites])
                 rend = self.render_onclick(pos)
-                self.choose, self.chxy, self.field, self.flag, self.posxy, self.user = rend[0], rend[1], rend[2], rend[3], rend[4], rend[5]
+                self.choose, self.chxy, self.field, self.flag, self.posxy, self.user = rend[0], rend[1], rend[2], rend[
+                    3], rend[4], rend[5]
             except UnboundLocalError:
                 pass
         try:
@@ -271,15 +275,17 @@ class level():
         if self.up_flag or self.down_flag or self.right_flag or self.left_flag:
             try:
                 turn = self.turnit(self.u_pos)
-                self.choose, self.flag, self.field, self.u_pos, self.chxy, self.posxy, self.side, self.user_coords = turn[0], turn[1], turn[2], turn[3], \
-                                                                             turn[4], turn[5], turn[6], turn[7]
+                self.choose, self.flag, self.field, self.u_pos, self.chxy, self.posxy, self.side, self.user_coords = \
+                turn[0], turn[1], turn[2], turn[3], \
+                turn[4], turn[5], turn[6], turn[7]
                 self.first_is = True
                 self.all_sprites.remove(*[el for el in self.all_sprites])
             except UnboundLocalError:
                 pass
         if self.side == self.walls['win'][0] and self.user_coords == tuple(self.walls['win'][1]):
             return 'win'
-        if list(self.user_coords) in self.mines[self.flag] and list(self.user_coords) not in self.mines_already[self.flag]:
+        if list(self.user_coords) in self.mines[self.flag] and list(self.user_coords) not in self.mines_already[
+            self.flag]:
             self.mines_already[self.flag].append(list(self.user_coords))
             self.mines_active.append(list(self.user_coords))
             self.mines[self.flag].remove(list(self.user_coords))
@@ -295,23 +301,30 @@ class level():
         f_user_coords = user_coords
         if self.flag == u_pos[0]:
             # проверка на границы поля
-            if self.posxy[0] < self.pos[0] < self.posxy[0] + 340 and (self.posxy[1] < self.pos[1] < self.posxy[1] + 350 or (
+            if self.posxy[0] < self.pos[0] < self.posxy[0] + 340 and (
+                    self.posxy[1] < self.pos[1] < self.posxy[1] + 350 or (
                     self.posxy[1] < self.pos[1] < self.posxy[1] + 650 and self.side != "up" and self.side != "down")):
-                if u_pos[1][0] - 58 <= self.pos[0] <= u_pos[1][0] + 90 and u_pos[1][1] - 50 <= self.pos[1] <= u_pos[1][1] + 100:
+                if u_pos[1][0] - 58 <= self.pos[0] <= u_pos[1][0] + 90 and u_pos[1][1] - 50 <= self.pos[1] <= u_pos[1][
+                    1] + 100:
                     user_coords = list(user_coords)
-                    if u_pos[1][0] - 10 < self.pos[0] and u_pos[1][0] + 39 < self.pos[0] or u_pos[1][0] - 10 > self.pos[0] and \
+                    if u_pos[1][0] - 10 < self.pos[0] and u_pos[1][0] + 39 < self.pos[0] or u_pos[1][0] - 10 > self.pos[
+                        0] and \
                             u_pos[1][0] + 39 > self.pos[0] and u_pos[1][1] <= self.pos[1] <= u_pos[1][1] + 48:  # <-
-                        if u_pos[1][0] - 58 <= self.pos[0] <= u_pos[1][0] and u_pos[1][1] <= self.pos[1] <= u_pos[1][1] + 48:
+                        if u_pos[1][0] - 58 <= self.pos[0] <= u_pos[1][0] and u_pos[1][1] <= self.pos[1] <= u_pos[1][
+                            1] + 48:
                             user_coords[0] -= 50
                         elif u_pos[1][0] <= self.pos[0] <= u_pos[1][0] + 90 and u_pos[1][1] <= self.pos[1] <= u_pos[1][
                             1] + 48:  # ->
                             user_coords[0] += 50
-                    elif u_pos[1][1] < self.pos[1] and u_pos[1][1] + 50 < self.pos[1] or u_pos[1][1] > self.pos[1] and u_pos[1][
-                        1] + 50 > self.pos[1] and u_pos[1][0] - 10 <= self.pos[0] <= u_pos[1][0] + 50:
-                        if u_pos[1][1] - 50 <= self.pos[1] <= u_pos[1][1] and u_pos[1][0] - 8 <= self.pos[0] <= u_pos[1][0] + 50:
+                    elif u_pos[1][1] < self.pos[1] and u_pos[1][1] + 50 < self.pos[1] or u_pos[1][1] > self.pos[1] and \
+                            u_pos[1][
+                                1] + 50 > self.pos[1] and u_pos[1][0] - 10 <= self.pos[0] <= u_pos[1][0] + 50:
+                        if u_pos[1][1] - 50 <= self.pos[1] <= u_pos[1][1] and u_pos[1][0] - 8 <= self.pos[0] <= \
+                                u_pos[1][0] + 50:
                             user_coords[1] -= 50
-                        elif u_pos[1][1] <= self.pos[1] <= u_pos[1][1] + 100 and u_pos[1][0] - 8 <= self.pos[0] <= u_pos[1][
-                            0] + 50:
+                        elif u_pos[1][1] <= self.pos[1] <= u_pos[1][1] + 100 and u_pos[1][0] - 8 <= self.pos[0] <= \
+                                u_pos[1][
+                                    0] + 50:
                             user_coords[1] += 50
                     self.user_coords = tuple(user_coords)
                     self.u_pos = (self.side, self.user_coords)
@@ -382,12 +395,14 @@ class level():
                 self.side = "right"
                 self.user_coords = (225, 15)
                 self.chxy = (261, 706)
-                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "right", self.side)
+                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "right",
+                          self.side)
             elif u_pos[0] == "back":
                 self.side = "right"
                 self.user_coords = (75, 115)
                 self.chxy = (261, 706)
-                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "right", self.side)
+                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "right",
+                          self.side)
             elif u_pos[0] == "left":
                 self.side = "back"
                 self.user_coords = (75, 65)
@@ -397,7 +412,8 @@ class level():
             self.posxy = (75, 15)
             self.choose, self.flag, self.field, self.user = upp[0], upp[1], upp[2], upp[3]
         elif self.left_flag and (
-                56 <= self.pos[0] <= 66 and (115 <= self.pos[1] <= 161 or 65 <= self.pos[1] <= 111 or 275 <= self.pos[1] <= 321)):
+                56 <= self.pos[0] <= 66 and (
+                115 <= self.pos[1] <= 161 or 65 <= self.pos[1] <= 111 or 275 <= self.pos[1] <= 321)):
             if u_pos[0] == "right":
                 self.side = "back"
                 self.user_coords = (375, 115)
@@ -407,12 +423,14 @@ class level():
                 self.side = "left"
                 self.user_coords = (375, 65)
                 self.chxy = (206, 706)
-                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "left", self.side)
+                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "left",
+                          self.side)
             elif u_pos[0] == "down":
                 self.side = "left"
                 self.user_coords = (325, 615)
                 self.chxy = (206, 706)
-                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "left", self.side)
+                upp = sde(self.user, "textures/left_right_big_choose.jpg", "textures/first_side_field.jpg", "left",
+                          self.side)
             self.posxy = (75, 15)
             self.u_pos = [self.side, self.user_coords]
             self.choose, self.flag, self.field, self.user = upp[0], upp[1], upp[2], upp[3]
@@ -457,7 +475,10 @@ class Level_Pick:
         elif 125 <= pos[0] <= 385 and 600 <= pos[1] <= 745:
             return 'level'
 
+
 ren = ''
+
+
 class MainScreen:
     def __init__(self, s):
         self.screen = s
@@ -765,3 +786,9 @@ class Shop:
                     return 'buy_player_2'
                 elif position[0] in range(225, 250):
                     return 'buy_player_3'
+                elif position[0] in range(50, 75):
+                    return 'choose_player_1'
+                elif position[0] in range(150, 175):
+                    return 'choose_player_2'
+                elif position[0] in range(250, 275):
+                    return 'choose_player_3'
