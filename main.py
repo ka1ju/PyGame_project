@@ -134,14 +134,12 @@ while running:
                 achievements = open('achievements.json', 'r', encoding='utf-8')
                 cost = json.load(achievements)
                 achievements.close()
-                achievements = open('achievements.json', 'w', encoding='utf-8')
                 if cost['players']['player_1']['opened'] == 1:
                     player = Image.open('textures/player_1.png')
                     prev_player = Image.open('textures/user.png')
                     name = open('player.txt', 'r').read()
-                    prev_player.save(name)
-                    player.save('user.png')
-                achievements.close()
+                    prev_player.save('textures/' + name)
+                    player.save('textures/user.png')
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
             pygame.display.flip()
