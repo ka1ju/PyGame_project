@@ -136,7 +136,12 @@ while running:
                 achievements.close()
                 achievements = open('achievements.json', 'w', encoding='utf-8')
                 if cost['players']['player_1']['opened'] == 1:
-                    player = Image.open('sprites/player_1.png')
+                    player = Image.open('textures/player_1.png')
+                    prev_player = Image.open('textures/user.png')
+                    name = open('player.txt', 'r')
+                    print(name)
+                    '''prev_player.save()
+                    player.save('user.png')'''
                 achievements.close()
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
