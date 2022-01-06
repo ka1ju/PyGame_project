@@ -522,7 +522,8 @@ class Rules:
         self.screen.blit(self.rule_3, (0, 80))
         self.screen.blit(self.rule_3_1, (0, 95))
         self.screen.blit(self.rule_4, (0, 110))
-        self.screen
+        self.screen.blit(self.rule_5, (0, 125))
+        self.screen.blit(self.rule_5_1, (0, 140))
 
     def click(self, pos):
         if pos[1] in range(height - 50, height) and pos[0] in range(225, 275):
