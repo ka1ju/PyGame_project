@@ -56,9 +56,9 @@ wall = pygame.image.load("textures/wall.jpg").convert_alpha()
 first_is = True
 
 
-class Bad():
-    def __init__(self, screen):
-        self.screen = screen
+class Bad:
+    def __init__(self, s):
+        self.screen = s
         self.background = load_image('textures/level_pcik_back.png')
         self.myfont1 = pygame.font.SysFont('arial', 50)
         self.good = pygame.transform.scale(load_image('textures/good.png', (100, 100)), (100, 100))
@@ -74,11 +74,11 @@ class Bad():
             return 'start'
 
 
-class Win():
-    def __init__(self, screen, time, level):
+class Win:
+    def __init__(self, s, time, level):
         self.star_frame = 0
         self.time = time
-        self.screen = screen
+        self.screen = s
         self.background = load_image('textures/level_pcik_back.png')
         self.good = pygame.transform.scale(load_image('textures/good.png', (100, 100)), (100, 100))
         self.myfont1 = pygame.font.SysFont('arial', 70)
@@ -124,7 +124,7 @@ class Win():
             self.star_frame = 0
 
 
-class level():
+class level:
     def __init__(self, screen, walls, level):
         self.mines_already = {"front": [],
                               "up": [],
@@ -479,6 +479,23 @@ class Level_Pick:
 class Rules:
     def __init__(self, s):
         self.screen = s
+
+        self.font = pygame.font.SysFont('arial', 15)
+        self.text = self.font.render(str('Правила и механики'), False, pygame.Color('purple'))
+        self.rule_1 = self.font.render(str('1.Перемещение по лабиринту происходит с помощью клика мышью'), False,
+                                       pygame.Color('purple'))
+        self.rule_2 = self.font.render(str('2.Перемещаться можно только по клеткам, на которых нет стен'), False,
+                                       pygame.Color('purple'))
+        self.rule_3 = self.font.render(str('3.Просматривать все грани параллелепипеда без перемещения'), False,
+                                       pygame.Color('purple'))
+        self.rule_3_1 = self.font.render(str('возможно с помощью развёртки расположеннной внизу экрана'), False,
+                                         pygame.Color('purple'))
+        self.rule_4 = self.font.render(str('4.На карте присутсвуют мины, активирующиеся при наступании на них'), False,
+                                       pygame.Color('purple'))
+        self.rule_5 = self.font.render(str('5.За прожодение уровней за достаточно хорошее время вы получаете '
+                                           'звёзды'), False, pygame.Color('purple'))
+        self.rule_5_1 = self.font.render(str('на которые можно покупать в магазине различные предметы'), False, pygame.Color('purple'))
+
         self.rules_sprites = pygame.sprite.Group()
 
         self.rules_sprites.add(background)
@@ -499,6 +516,13 @@ class Rules:
 
     def render(self, _):
         self.rules_sprites.draw(self.screen)
+        self.screen.blit(self.text, (0, 0))
+        self.screen.blit(self.rule_1, (0, 50))
+        self.screen.blit(self.rule_2, (0, 65))
+        self.screen.blit(self.rule_3, (0, 80))
+        self.screen.blit(self.rule_3_1, (0, 95))
+        self.screen.blit(self.rule_4, (0, 110))
+        self.screen
 
     def click(self, pos):
         if pos[1] in range(height - 50, height) and pos[0] in range(225, 275):
