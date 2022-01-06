@@ -3,7 +3,7 @@ import os
 import sys
 import json
 import time
-from windows import MainScreen, Shop, Level_Pick, level, Win, Bad
+from windows import MainScreen, Shop, Level_Pick, level, Win, Bad, Rules
 from PIL import Image
 
 pygame.display.set_caption('cube-lab')
@@ -29,7 +29,7 @@ pygame.mouse.set_visible(False)
 
 
 ren = ''
-ms = MainScreen(s=screen)
+ms = Rules(s=screen)
 ms.screen = screen
 
 
@@ -62,6 +62,8 @@ while running:
             out = ms.click(place)
             if out == 'exit':
                 running = False
+            elif out == 'ok':
+                ms = MainScreen(s=screen)
             elif out == 'win':
                 ms = Win(screen, time.time() - ms.time, ms.level)
             elif out == 'level':

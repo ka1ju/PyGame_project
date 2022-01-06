@@ -276,8 +276,8 @@ class level():
             try:
                 turn = self.turnit(self.u_pos)
                 self.choose, self.flag, self.field, self.u_pos, self.chxy, self.posxy, self.side, self.user_coords = \
-                turn[0], turn[1], turn[2], turn[3], \
-                turn[4], turn[5], turn[6], turn[7]
+                    turn[0], turn[1], turn[2], turn[3], \
+                    turn[4], turn[5], turn[6], turn[7]
                 self.first_is = True
                 self.all_sprites.remove(*[el for el in self.all_sprites])
             except UnboundLocalError:
@@ -474,6 +474,28 @@ class Level_Pick:
                 self.level = 2
         elif 125 <= pos[0] <= 385 and 600 <= pos[1] <= 745:
             return 'level'
+
+
+class Rules:
+    def __init__(self, s):
+        self.screen = s
+        self.rules_sprites = pygame.sprite.Group()
+
+        self.rules_sprites.add(background)
+
+        self.ok_btn = pygame.sprite.Sprite()
+        self.ok_btn.image = pygame.transform.scale(load_image('sprites/img_buy_btn.png'), (50, 50))
+        self.ok_btn.rect = self.ok_btn.image.get_rect()
+        self.ok_btn.rect.x = 225
+        self.ok_btn.rect.y = height - 50
+        self.rules_sprites.add(self.ok_btn)
+
+    def render(self, _):
+        self.rules_sprites.draw(self.screen)
+
+    def click(self, pos):
+        if pos[1] in range(height - 50, height) and pos[0] in range(225, 275):
+            return 'ok'
 
 
 ren = ''
