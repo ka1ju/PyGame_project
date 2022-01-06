@@ -64,6 +64,8 @@ while running:
                 running = False
             elif out == 'ok':
                 ms = MainScreen(s=screen)
+            elif out == 'rules':
+                ms = Rules(s=screen)
             elif out == 'win':
                 ms = Win(screen, time.time() - ms.time, ms.level)
             elif out == 'level':

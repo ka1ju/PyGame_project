@@ -512,6 +512,20 @@ class MainScreen:
     def __init__(self, s):
         self.screen = s
 
+        self.img_rules_btn = pygame.sprite.Sprite()
+        self.img_rules_btn.image = pygame.transform.scale(load_image('sprites/img_rules_btn.png'), (50, 50))
+        self.img_rules_btn.rect = self.img_rules_btn.image.get_rect()
+        self.img_rules_btn.rect.x = 0
+        self.img_rules_btn.rect.y = height - 50
+        main_screen_sprites.add(self.img_rules_btn)
+
+        self.img_rules = pygame.sprite.Sprite()
+        self.img_rules.image = pygame.transform.scale(load_image('sprites/img_rules.png'), (30, 30))
+        self.img_rules.rect = self.img_rules.image.get_rect()
+        self.img_rules.rect.x = 10
+        self.img_rules.rect.y = height - 40
+        main_screen_sprites.add(self.img_rules)
+
         self.img_start_btn = pygame.sprite.Sprite()
         self.img_start_btn.image = pygame.transform.scale(load_image('sprites/img_start_btn.png'), (100, 100))
         self.img_start_btn.rect = self.img_start_btn.image.get_rect()
@@ -581,8 +595,11 @@ class MainScreen:
                 return 'shop'
             elif position[0] in range(width - 100, width):
                 return 'settings'
-        elif position[1] in range(height - 50, height) and position[0] in range(width - 50, width):
-            return 'exit'
+        elif position[1] in range(height - 50, height):
+            if position[0] in range(width - 50, width):
+                return 'exit'
+            elif position[0] in range(0, 50):
+                return 'rules'
 
 
 class Shop:
