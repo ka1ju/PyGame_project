@@ -3,7 +3,7 @@ import os
 import sys
 import json
 import time
-from windows import MainScreen, Shop, Level_Pick, level, Win, Bad, Rules
+from windows import MainScreen, Shop, Level_Pick, level, Win, Bad, Rules, Exit
 from PIL import Image
 
 pygame.display.set_caption('cube-lab')
@@ -61,7 +61,11 @@ while running:
             place = event.pos
             out = ms.click(place)
             if out == 'exit':
+                ms = Exit(s=screen)
+            elif out == 'accept':
                 running = False
+            elif out == 'decline':
+                ms = MainScreen(s=screen)
             elif out == 'ok':
                 ms = MainScreen(s=screen)
             elif out == 'rules':

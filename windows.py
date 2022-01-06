@@ -505,6 +505,53 @@ class Rules:
             return 'ok'
 
 
+class Exit:
+    def __init__(self, s):
+        self.screen = s
+
+        self.exit_sprites = pygame.sprite.Group()
+
+        self.exit_sprites.add(background)
+
+        self.accept_btn = pygame.sprite.Sprite()
+        self.accept_btn.image = pygame.transform.scale(load_image('sprites/img_accept_btn.png'), (100, 100))
+        self.accept_btn.rect = self.accept_btn.image.get_rect()
+        self.accept_btn.rect.x = width // 3 - 50
+        self.accept_btn.rect.y = height // 2 - 50
+        self.exit_sprites.add(self.accept_btn)
+
+        self.accept = pygame.sprite.Sprite()
+        self.accept.image = pygame.transform.scale(load_image('sprites/img_ok.png'), (50, 50))
+        self.accept.rect = self.accept.image.get_rect()
+        self.accept.rect.x = width // 3 - 25
+        self.accept.rect.y = height // 2 - 25
+        self.exit_sprites.add(self.accept)
+
+        self.decline_btn = pygame.sprite.Sprite()
+        self.decline_btn.image = pygame.transform.scale(load_image('sprites/img_decline_btn.png'), (100, 100))
+        self.decline_btn.rect = self.decline_btn.image.get_rect()
+        self.decline_btn.rect.x = width // 3 * 2 - 50
+        self.decline_btn.rect.y = height // 2 - 50
+        self.exit_sprites.add(self.decline_btn)
+
+        self.decline = pygame.sprite.Sprite()
+        self.decline.image = pygame.transform.scale(load_image('sprites/close.png'), (50, 50))
+        self.decline.rect = self.decline.image.get_rect()
+        self.decline.rect.x = width // 3 * 2 - 25
+        self.decline.rect.y = height // 2 - 25
+        self.exit_sprites.add(self.decline)
+
+    def render(self, _):
+        self.exit_sprites.draw(self.screen)
+
+    def click(self, pos):
+        if pos[1] in range(height // 2 - 50, height // 2 + 50):
+            if pos[0] in range(width // 3 - 50, width // 3 + 50):
+                return 'accept'
+            elif pos[0] in range(width // 3 * 2 - 50, width // 3 * 2 + 50):
+                return 'decline'
+
+
 ren = ''
 
 
