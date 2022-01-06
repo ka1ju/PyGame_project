@@ -484,11 +484,18 @@ class Rules:
         self.rules_sprites.add(background)
 
         self.ok_btn = pygame.sprite.Sprite()
-        self.ok_btn.image = pygame.transform.scale(load_image('sprites/img_buy_btn.png'), (50, 50))
+        self.ok_btn.image = pygame.transform.scale(load_image('sprites/img_ok_btn.png'), (50, 50))
         self.ok_btn.rect = self.ok_btn.image.get_rect()
         self.ok_btn.rect.x = 225
         self.ok_btn.rect.y = height - 50
         self.rules_sprites.add(self.ok_btn)
+
+        self.ok = pygame.sprite.Sprite()
+        self.ok.image = pygame.transform.scale(load_image('sprites/img_ok.png'), (28, 28))
+        self.ok.rect = self.ok_btn.image.get_rect()
+        self.ok.rect.x = 235
+        self.ok.rect.y = height - 37
+        self.rules_sprites.add(self.ok)
 
     def render(self, _):
         self.rules_sprites.draw(self.screen)
