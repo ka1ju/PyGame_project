@@ -534,6 +534,9 @@ class Exit:
     def __init__(self, s):
         self.screen = s
 
+        self.font = pygame.font.SysFont('arial', 30)
+        self.text = self.font.render(str('Вы уверены что хотите выйти?'), False, pygame.Color('purple'))
+
         self.exit_sprites = pygame.sprite.Group()
 
         self.exit_sprites.add(background)
@@ -568,6 +571,7 @@ class Exit:
 
     def render(self, _):
         self.exit_sprites.draw(self.screen)
+        self.screen.blit(self.text, (70, 300))
 
     def click(self, pos):
         if pos[1] in range(height // 2 - 50, height // 2 + 50):
