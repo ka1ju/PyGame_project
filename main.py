@@ -27,7 +27,6 @@ CURSOR = pygame.image.load("sprites/img_cursor.png").convert_alpha()
 pygame.mouse.set_cursor((8, 8), (4, 4), (0, 0, 0, 0, 0, 0, 0, 0), (0, 0, 0, 0, 0, 0, 0, 0))
 pygame.mouse.set_visible(False)
 
-
 ren = ''
 ms = Rules(s=screen)
 ms.screen = screen
@@ -186,7 +185,8 @@ while running:
         if event.type == star_up and ms.__class__.__name__ == 'Win':
             ms.star_plus()
             pygame.display.flip()
-        if event.type == mines and ms.__class__.__name__ == 'level' and (ms.mines_active != [] or ms.mines_deactive != []):
+        if event.type == mines and ms.__class__.__name__ == 'level' and (
+                ms.mines_active != [] or ms.mines_deactive != []):
             g = ms.mineses()
             if g == 'died':
                 ms = Bad(screen)
