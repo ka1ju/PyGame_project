@@ -611,10 +611,10 @@ class MainScreen:
         main_screen_sprites.add(self.img_start_btn)
 
         self.img_start = pygame.sprite.Sprite()
-        self.img_start.image = pygame.transform.scale(load_image('sprites/play.png'), (80, 80))
+        self.img_start.image = pygame.transform.scale(load_image('sprites/play.png'), (50, 45))
         self.img_start.rect = self.img_start.image.get_rect()
-        self.img_start.rect.x = 15
-        self.img_start.rect.y = height // 2 - 40
+        self.img_start.rect.x = 30
+        self.img_start.rect.y = height // 2 - 22.5
         main_screen_sprites.add(self.img_start)
 
         self.img_shop_btn = pygame.sprite.Sprite()
@@ -728,9 +728,9 @@ class Shop:
         self.shop_sprites.add(self.img_color_btn)
 
         self.img_color = pygame.sprite.Sprite()
-        self.img_color.image = pygame.transform.scale(load_image('sprites/капля.png'), (40, 56))
+        self.img_color.image = pygame.transform.scale(load_image('sprites/капля.png'), (55, 55))
         self.img_color.rect = self.img_color.image.get_rect()
-        self.img_color.rect.x = width - 70
+        self.img_color.rect.x = width - 77.5
         self.img_color.rect.y = 20
         self.shop_sprites.add(self.img_color)
 
