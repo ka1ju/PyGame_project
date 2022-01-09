@@ -687,6 +687,11 @@ class Shop:
         self.wall_sprites = pygame.sprite.Group()
         self.color_sprites = pygame.sprite.Group()
 
+        self.font = pygame.font.SysFont('arial', 30)
+        self.player_1_cost_text = self.font.render(str('1$'), False, pygame.Color('black'))
+        self.player_2_cost_text = self.font.render(str('2$'), False, pygame.Color('black'))
+        self.player_3_cost_text = self.font.render(str('3$'), False, pygame.Color('black'))
+
         # спрайты магазина
         self.type = 'player'
 
@@ -886,6 +891,15 @@ class Shop:
         self.shop_sprites.draw(self.screen)
         if arg != '':
             arg.draw(self.screen)
+            if arg == self.player_sprites:
+                self.screen.blit(self.player_1_cost_text, (40, 230))
+                self.screen.blit(self.player_2_cost_text, (140, 230))
+                self.screen.blit(self.player_3_cost_text, (240, 230))
+        my_money = open('progress.json', 'r', encoding='utf-8')
+        money = json.load(my_money)
+        my_money.close()
+        self.money = self.font.render('Количество звёзд:' + str(money['stars']), False, pygame.Color('black'))
+        self.screen.blit(self.money, (0, height - 30))
 
     def click(self, position):
         if position[1] in range(0, 100):
