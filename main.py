@@ -6,7 +6,7 @@ import time
 from windows import MainScreen, Shop, Level_Pick, level, Win, Bad, Rules, Exit
 from PIL import Image
 
-pygame.display.set_caption('cube-lab')
+pygame.display.set_caption('CHECH')
 size = width, height = 500, 800
 screen = pygame.display.set_mode(size)
 running = True
@@ -71,12 +71,16 @@ while running:
                 ms = Rules(s=screen)
             elif out == 'win':
                 ms = Win(screen, time.time() - ms.time, ms.level)
+            elif out == "GOTOCHOISE":
+                ms = Level_Pick(screen)
+            elif out == "GOTOMAIN":
+                ms = MainScreen(screen)
             elif out == 'level':
                 g = walls_load(ms.level)
                 achievements = ms.level
                 ms = level(screen, g, achievements)
             elif out == 'start':
-                ms = Level_Pick()
+                ms = Level_Pick(screen)
             elif out == 'shop':
                 ms = Shop(s=screen)
                 ren = ms.player_sprites

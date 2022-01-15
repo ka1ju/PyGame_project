@@ -136,6 +136,8 @@ class level:
         f = open('mines.json', 'r', encoding='utf-8')
         d = json.load(f)
         f.close()
+        self.img_close = pygame.image.load('sprites/close.png')
+        self.img_close = pygame.transform.scale(load_image('sprites/close.png'), (25, 25))
         self.mines_activesprites = []
         self.mines_deactivesprites = []
         self.mines = d[level - 1]
@@ -199,6 +201,7 @@ class level:
         self.scr.blit(self.field, self.posxy)  # (800-n) // 2
         self.scr.blit(self.choose, self.chxy)
         self.scr.blit(self.user, self.u_pos[1])
+        self.scr.blit(self.img_close, (500 - 50, 800 - 50))
         if self.first_is:
             self.mines_active = []
             self.mines_deactive = []
@@ -282,6 +285,9 @@ class level:
                 self.all_sprites.remove(*[el for el in self.all_sprites])
             except UnboundLocalError:
                 pass
+        if pos[1] in range(800 - 70, 800):
+            if pos[0] in range(500 - 70, 500):
+                return "GOTOCHOISE"
         if self.side == self.walls['win'][0] and self.user_coords == tuple(self.walls['win'][1]):
             return 'win'
         if list(self.user_coords) in self.mines[self.flag] and list(self.user_coords) not in self.mines_already[
@@ -438,10 +444,13 @@ class level:
 
 
 class Level_Pick:
-    def __init__(self):
+    def __init__(self, s):
         f = open('progress.json', 'r', encoding='utf-8')
+        self.screen = s
         self.g = json.load(f)
         f.close()
+        self.img_close = pygame.image.load('sprites/close.png')
+        self.img_close = pygame.transform.scale(load_image('sprites/close.png'), (25, 25))
         self.background = load_image('textures/level_pcik_back.png')
         self.left = pygame.transform.scale(load_image('textures/left.png', (100, 100)), (100, 100))
         self.right = pygame.transform.scale(load_image('textures/right.png', (100, 100)), (100, 100))
@@ -462,6 +471,7 @@ class Level_Pick:
         self.screen.blit(surf1, (25, 100))
         self.screen.blit(surf2, (220, 260))
         self.screen.blit(self.start, (125, 600))
+        self.screen.blit(self.img_close, (500 - 50, 800 - 50))
 
     def click(self, pos):
         if 0 <= pos[0] <= 100 and 300 <= pos[1] <= 400:
@@ -474,6 +484,9 @@ class Level_Pick:
                 self.level = 2
         elif 125 <= pos[0] <= 385 and 600 <= pos[1] <= 745:
             return 'level'
+        elif pos[1] in range(800 - 70, 800):
+            if pos[0] in range(500 - 70, 500):
+                return "GOTOMAIN"
 
 
 class Rules:
