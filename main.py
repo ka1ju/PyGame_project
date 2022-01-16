@@ -12,8 +12,8 @@ screen = pygame.display.set_mode(size)
 running = True
 
 
-def load_image(name, color_key=None):
-    fullname = os.path.join('', name)
+def load_image(file_name, color_key=None):
+    fullname = os.path.join('', file_name)
     if not os.path.isfile(fullname):
         print(f"Файл с изображением '{fullname}' не найден")
         sys.exit()
