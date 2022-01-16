@@ -17,7 +17,7 @@ def sde(user, t_choose, t_field, flag, side):
     return choose, flag, field, user
 
 
-def load_image(name):
+def load_image(name, color_key=None):
     fullname = os.path.join('', name)
     if not os.path.isfile(fullname):
         print(f"Файл с изображением '{fullname}' не найден")
