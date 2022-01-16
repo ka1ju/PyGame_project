@@ -35,9 +35,9 @@ ms.screen = screen
 def walls_load(ind):
     ind -= 1
     f = open('levels.json', 'r', encoding='utf-8')
-    g = json.load(f)
+    loaded_file = json.load(f)
     f.close()
-    return g[ind]
+    return loaded_file[ind]
 
 
 clock = pygame.time.Clock()
