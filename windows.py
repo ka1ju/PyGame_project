@@ -10,7 +10,6 @@ size = width, height = 500, 800
 def sde(user, t_choose, t_field, flag, side):
     choose = pygame.image.load(t_choose).convert()
     field = pygame.image.load(t_field).convert()
-    flag = flag
     if side == flag:
         user = pygame.image.load("textures/user.png").convert_alpha()
     else:
@@ -355,6 +354,7 @@ class level:
             return 'died'
 
     def turnit(self, u_pos):
+        upp = []
         if self.up_flag and 227 <= self.pos[0] <= 275 and 3 <= self.pos[1] <= 15:
             if u_pos[0] == "front":
                 self.side = "up"
