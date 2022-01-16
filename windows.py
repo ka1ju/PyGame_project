@@ -202,6 +202,11 @@ class level:
         self.scr.blit(self.choose, self.chxy)
         self.scr.blit(self.user, self.u_pos[1])
         self.scr.blit(self.img_close, (500 - 50, 800 - 50))
+        if self.flag == self.walls['win'][0]:
+            sprite = pygame.sprite.Sprite()
+            sprite.image = load_image("textures/finish.png")
+            sprite.rect = pygame.Rect((self.walls['win'][1][0], self.walls['win'][1][1], 50, 50))
+            self.scr.blit(sprite.image, (self.walls['win'][1][0], self.walls['win'][1][1]))
         if self.first_is:
             self.mines_active = []
             self.mines_deactive = []
@@ -212,12 +217,6 @@ class level:
                 sprite.image = load_image("textures/wall.jpg")
                 sprite.rect = pygame.Rect((el[0], el[1], 50, 50))
                 self.all_sprites.add(sprite)
-            if self.flag == self.walls['win'][0]:
-                sprite = pygame.sprite.Sprite()
-                sprite.image = load_image("textures/finish.png")
-                sprite.rect = pygame.Rect((self.walls['win'][1][0], self.walls['win'][1][1], 50, 50))
-                self.all_sprites.add(sprite)
-
         self.first_is = False
         self.all_sprites.draw(self.scr)
         ct = self.check_turn()
@@ -260,16 +259,6 @@ class level:
 
     def click(self, pos):
         self.pos = pos
-        if (self.pos[1] > self.posxy[1] + 350 and self.flag == "up" or self.flag == "down") or self.pos[1] > self.posxy[
-            1] + 650:
-            try:
-                self.first_is = True
-                self.all_sprites.remove(*[el for el in self.all_sprites])
-                rend = self.render_onclick(pos)
-                self.choose, self.chxy, self.field, self.flag, self.posxy, self.user = rend[0], rend[1], rend[2], rend[
-                    3], rend[4], rend[5]
-            except UnboundLocalError:
-                pass
         try:
             stp = self.step(self.u_pos, self.user_coords)
             self.user_coords, self.u_pos = stp[0], stp[1]
