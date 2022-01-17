@@ -258,6 +258,16 @@ class level:
 
     def click(self, pos):
         self.pos = pos
+        if (self.pos[1] > self.posxy[1] + 350 and self.flag == "up" or self.flag == "down") or self.pos[1] > self.posxy[
+            1] + 650:
+            try:
+                self.first_is = True
+                self.all_sprites.remove(*[el for el in self.all_sprites])
+                rend = self.render_onclick(pos)
+                self.choose, self.chxy, self.field, self.flag, self.posxy, self.user = rend[0], rend[1], rend[2], rend[
+                    3], rend[4], rend[5]
+            except UnboundLocalError:
+                pass
         try:
             stp = self.step(self.u_pos, self.user_coords)
             self.user_coords, self.u_pos = stp[0], stp[1]
