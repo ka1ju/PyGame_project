@@ -258,7 +258,7 @@ class level:
 
     def click(self, pos):
         self.pos = pos
-        if (self.pos[1] > self.posxy[1] + 350 and self.flag == "up" or self.flag == "down") or self.pos[1] > self.posxy[
+        if ((self.pos[1] > self.posxy[1] + 350 and self.flag == "up") or (self.flag == "down" and self.pos[1] > self.posxy[1] + 350)) or self.pos[1] > self.posxy[
             1] + 650:
             try:
                 self.first_is = True
